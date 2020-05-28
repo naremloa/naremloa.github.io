@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta name="google-site-verification" content="b6XM720gak43P3qQQ9WBX4dVmWfGsp7CIrrOpvsLwdw">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"naremloa.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"flat"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="隨筆紀錄">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文章隨筆(1">
+<meta property="og:url" content="https://naremloa.github.io/2020/05/20/jotting_1/index.html">
+<meta property="og:site_name" content="naremloa&#39;s site">
+<meta property="og:description" content="隨筆紀錄">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/PTFOAin.png">
+<meta property="og:image" content="https://i.imgur.com/vUsIxDN.png">
+<meta property="article:published_time" content="2020-05-20T06:04:52.000Z">
+<meta property="article:modified_time" content="2020-05-28T09:33:40.102Z">
+<meta property="article:author" content="naremloa">
+<meta property="article:tag" content="HTTP">
+<meta property="article:tag" content="文章隨筆">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/PTFOAin.png">
+
+<link rel="canonical" href="https://naremloa.github.io/2020/05/20/jotting_1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+<meta name="google-site-verification" content="b6XM720gak43P3qQQ9WBX4dVmWfGsp7CIrrOpvsLwdw" />
+  <title>文章隨筆(1 | naremloa's site</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167304127-1"></script>
+    <script data-pjax>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-167304127-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">naremloa's site</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">FED</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://naremloa.github.io/2020/05/20/jotting_1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="naremloa">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="naremloa's site">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          文章隨筆(1
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-05-20 14:04:52" itemprop="dateCreated datePublished" datetime="2020-05-20T14:04:52+08:00">2020-05-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-05-28 17:33:40" itemprop="dateModified" datetime="2020-05-28T17:33:40+08:00">2020-05-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HTTP/" itemprop="url" rel="index"><span itemprop="name">HTTP</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2020/05/20/jotting_1/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/05/20/jotting_1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">隨筆紀錄</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>原文: <a href="https://juejin.im/post/5e76bd516fb9a07cce750746#heading-91" target="_blank" rel="noopener">（建议精读）HTTP灵魂之问，巩固你的 HTTP 知识体系</a></p>
+</blockquote>
+<ol>
+<li><code>HTTP</code>一般分為：<code>請求</code>和<code>響應</code>兩種。</li>
+<li><code>HTTP</code>的報文結構，同樣也分兩種。</li>
+<li><code>HTTP</code>各類狀態碼，及含義。</li>
+<li><code>URI</code>結構，以及<code>URI</code>編碼。尤其是<code>URI</code>的編碼機制。</li>
+<li><code>HTTP</code>的特點：
+<ul>
+<li>靈活和高擴展性。格式上自由，傳輸方式多樣（不侷限於文本）</li>
+<li>基於<code>TCP</code>，繼承<code>TCP</code>部分特點，如可靠性等。</li>
+<li>請求-響應 特點。</li>
+<li>無狀態，每次請求都是獨立，無上下文相關。</li>
+</ul>
+</li>
+<li><code>HTTP</code>的缺點：
+<ul>
+<li>在長連接場景下，無狀態帶來不便。</li>
+<li>明文傳輸，造成安全問題。</li>
+<li>長連接場景下的隊頭阻塞問題。</li>
+</ul>
+</li>
+<li><code>MIME</code>標準。與<code>HTTP</code>引入<code>MIME</code>標準解決的問題。涉及<code>Content-Type</code>和<code>accept</code>字短。</li>
+<li><code>Content-Type</code>是對發送端而言，告訴接受端發送的數據格式。<code>accept</code>則是對接受端而言，告訴發送端自己想要的格式。</li>
+<li>壓縮方式也是用同樣的方式處理。涉及字段<code>Content-Encoding</code>和<code>Accept-Encoding</code>。兩者的區別同樣也是用在發送端和接受端的區別。</li>
+<li>支持語言。涉及字段<code>Content-Language</code>和<code>Accept-Language</code>。同上。</li>
+<li>字符集。涉及字段<code>Content-Type</code>的<code>charset</code>屬性和<code>Accept-Charset</code>。 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 發送端</span><br><span class="line">Content-Type: text&#x2F;html; charset&#x3D;utf-8</span><br><span class="line">&#x2F;&#x2F; 接收端</span><br><span class="line">Accept-Charset: charset&#x3D;utf-8</span><br></pre></td></tr></table></figure>
+</li>
+<li>HTTP傳輸的數據，分為定長和不定長。</li>
+<li>定長需要通過<code>Content-Length</code>指定長度，過小會截斷，過長會中斷響應。</li>
+<li>不定長需要設置<code>Transfer-Encoding: chunked</code>。表示會分塊傳輸數據。這個字段會使<code>Content-Length</code>失去作用，並使請求基於長連接的方式動態推送內容。</li>
+<li>對於大文件傳輸，HTTP採取<code>範圍請求</code>方案。涉及字段<code>Accept-Ranges: none</code>。</li>
+<li>對於<code>Range</code>字段，格式為: <code>bytes=x-y</code></li>
+<li>大文件請求，分為請求單段數據，和多段數據。多段數據應用在長連接場景。</li>
+<li>單段數據報文：   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP&#x2F;1.1 206 Partial Content</span><br><span class="line">Content-Length: 10</span><br><span class="line">Accept-Ranges: bytes</span><br><span class="line">Content-Range: bytes 0-9&#x2F;100</span><br><span class="line">i am xxxxx</span><br></pre></td></tr></table></figure>
+</li>
+<li>多段數據報文：   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">HTTP&#x2F;1.1 206 Partial Content</span><br><span class="line">Content-Type: multipart&#x2F;byteranges; boundary&#x3D;00000010101</span><br><span class="line">Content-Length: 189</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Accept-Ranges: bytes</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--00000010101</span><br><span class="line">Content-Type: text&#x2F;plain</span><br><span class="line">Content-Range: bytes 0-9&#x2F;96</span><br><span class="line"></span><br><span class="line">i am xxxxx</span><br><span class="line">--00000010101</span><br><span class="line">Content-Type: text&#x2F;plain</span><br><span class="line">Content-Range: bytes 20-29&#x2F;96</span><br><span class="line"></span><br><span class="line">eex jspy e</span><br><span class="line">--00000010101--</span><br></pre></td></tr></table></figure>
+注意：<code>Content-Type</code>的屬性<code>boundary</code>指定了多段響應的分隔符。</li>
+<li>HTTP存在兩種表單的提交：<code>application/x-www-form-urlencoded</code>和<code>multipart/form-data</code>。一般為<code>POST</code>請求。</li>
+<li><code>application/x-www-form-urlencoded</code>格式特點：
+<ul>
+<li>數據會被編碼成以<code>&amp;</code>分隔的鍵值對。</li>
+<li>字符以<code>URL</code>方式編碼。</li>
+</ul>
+</li>
+<li><code>multipart/form-data</code>格式特點：
+<ul>
+<li><code>Content-Type</code>字段會包含<code>boundary</code>屬性。且<code>boundary</code>的值有瀏覽器默認指定。</li>
+<li>數據會分為多個部分。每個之間通過分隔符隔開。且每一部分會有頭部報文的一部分。</li>
+<li>數據的最後一部分，在分隔符最後會在加上<code>--</code>作結尾。</li>
+<li>由於上述特點，表單中的每一個元素都會是獨立的資源表述。</li>
+</ul>
+</li>
+<li>通常，傳送圖片等，就是用<code>multipart/form-data</code>做傳輸。</li>
+<li>對於隊頭阻塞，目前有兩個方案來解決。對一個域名<code>增加併發連接</code>數量。對一個域名做<code>域名切片</code>，也就是新增其子域名，多個子域名指向同一個伺服器。</li>
+<li>由於<code>HTTP</code>的無狀態特點，引入了<code>Cookie</code>來處理狀態保留問題。</li>
+<li>客戶端通過請求頭中的<code>Cookie</code>向伺服器發送帶狀態的請求，伺服器也可以通過響應頭的<code>Set-Cookie</code>對客戶端進行<code>Cookie</code>寫入動作。</li>
+<li><code>Cookie</code>的主要屬性：<br>
+<code>生存週期</code>：<code>Expires</code>, <code>Max-Age</code><br>
+<code>作用域</code>：<code>Domain</code>, <code>path</code><br>
+<code>安全相關</code>：<code>Secure</code>, <code>HttpOnly</code>, <code>SameSite</code>,</li>
+<li><code>Cookie</code>的缺點：
+<ul>
+<li>容量過小。上限為<code>4kB</code></li>
+<li>性能缺陷。沒有特定設定下，每個請求都會帶上完整的<code>Cookie</code>信息，該問題可以通過指定<code>Domain</code>和<code>Path</code>解決。</li>
+<li>安全缺陷。由於<code>Cookie</code>是通過純文本的方式傳送，容易在請求過程中被截取和竄改。</li>
+</ul>
+</li>
+<li><code>HTTP代理</code>功能：
+<ul>
+<li>負載均衡。</li>
+<li>保證集群的穩定。</li>
+<li>緩存代理。</li>
+</ul>
+</li>
+<li><code>HTTP代理</code>相關的頭部字段：
+<ul>
+<li><code>Via</code>：在請求中，帶上經手過的代理伺服器。</li>
+<li><code>X-Forwarded-For</code>：紀錄請求方的<code>IP位址</code>。</li>
+<li><code>X-Real-IP</code>：紀錄請求源頭的<code>客戶端IP</code>。</li>
+<li><code>X-Forwarded-Host</code>：功能同上，紀錄<code>客戶端域名</code>。</li>
+<li><code>X-Forwarded-Proto</code>：功能同上，紀錄<code>協議名</code>。</li>
+</ul>
+</li>
+<li><code>緩存代理</code>的控制分為兩部分：源伺服器的控制和客戶端的控制。</li>
+<li><code>Cache-Control</code>：通用字段，伺服器和客戶端都可以通過該字段操作緩存的工作。</li>
+<li><code>private</code>：響應頭。禁止代理伺服器進行緩存。</li>
+<li><code>public</code>：響應頭。允許代理伺服器進行緩存。</li>
+<li><code>proxy-revalidate</code>：響應頭。要求代理伺服器的緩存過期後要到源伺服器中獲取。</li>
+<li><code>s-maxage</code>：響應頭。限定緩存在代理伺服器中可以存放多久。</li>
+<li><code>max-stale</code>：請求頭。就是緩存過期了，還是可以繼續緩存和響應。</li>
+<li><code>min-fresh</code>：請求頭。緩存過期前，如果在指定時間之前，還是正查功能響應，如果在指定時間內，雖然還在緩存期限中，但就不會正常響應。</li>
+<li><code>only-if-cached</code>：請求頭。客戶端只接受代理緩存，不接受源伺服器的響應。</li>
+<li>同源：<code>scheme</code>, <code>host</code>, <code>port</code>都相同。</li>
+<li>非同源站點的限制：
+<ul>
+<li>不能讀取和修改對方的<code>DOM</code>。</li>
+<li>不能讀取對方的<code>Cookie</code>, <code>IndexDB</code>, <code>LocalStorage</code>。</li>
+<li>限制<code>XMLHttpRequest</code>請求。</li>
+</ul>
+</li>
+<li><code>CORS</code>，跨域資源共享。</li>
+<li><a href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/CORS#%E7%B0%A1%E5%96%AE%E8%AB%8B%E6%B1%82" target="_blank" rel="noopener">簡單請求</a>只能符合以下條件：
+<ul>
+<li>請求方法為：<code>GET</code>, <code>POST</code>, <code>HEAD</code>。</li>
+<li>請求頭的取值範圍：<code>Accept</code>, <code>Accept-Language</code>, <code>Content-Language</code>, <code>Content-Type</code>, <code>Last-Event-ID</code>, <code>DPR</code>, <code>Save-Data</code>, <code>Viewport-Width</code>, <code>Width</code>。</li>
+<li><code>Content-Type</code>標頭值：<code>application/x-www-form-urlencoded</code>, <code>multipart/form-data</code>, <code>text/plain</code>。</li>
+<li>沒有事件監聽器被註冊到任何用來發出請求的<code>XMLHttpRequestUpload</code>物件（經由<code>XMLHttpRequest.upload</code>屬性取得）上。</li>
+<li>請求中沒有<code>ReadableStream</code>物件被用於上傳。</li>
+</ul>
+</li>
+<li>瀏覽器在發送<code>簡單請求</code>前，會自動添加一個<code>origin</code>字段，用來說明來自哪裡。伺服器在拿到請求後，在響應會對應添加一個<code>Access-Control-Allow-Origin</code>字段，如果<code>origin</code>不在這個範圍內，則瀏覽器會將響應攔截（伺服器已成功響應了）。</li>
+<li><code>Access-Control-Allow-Credentials</code>：在<code>簡單請求</code>驗證成功過<code>origin</code>後，能用來標示是否允許發送<code>Cookie</code>。</li>
+<li><code>Access-Control-Expose-Headers</code>：在<code>簡單請求</code>驗證成功過<code>origin</code>後，除了<code>簡單請求</code>規定下的請求頭字段可以拿到外，還能拿到這個字段聲明的響應頭字段。</li>
+<li>對<code>非簡單請求</code>，會先發送<code>預檢請求</code>，之後才是<code>跨域請求</code>。</li>
+<li><code>預檢請求</code>的方法是<code>OPTIONS</code>，同時會加上<code>Origin</code>源地址, <code>Host</code>目標地址, <code>Access-Control-Request-Method</code>列出跨域請求用到哪個<code>HTTP</code>方法, <code>Access-Control-Request-Headers</code>列出跨域請求將要加上什麼請求頭。</li>
+<li><code>預檢請求</code>的響應格式大致如下： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HTTP&#x2F;1.1 200 OK</span><br><span class="line">Access-Control-Allow-Origin: *</span><br><span class="line">Access-Control-Allow-Methods: GET, POST, PUT</span><br><span class="line">Access-Control-Allow-Headers: X-Custom-Header</span><br><span class="line">Access-Control-Allow-Credentials: true</span><br><span class="line">Access-Control-Max-Age: 1728000</span><br><span class="line">Content-Type: text&#x2F;html; charset&#x3D;utf-8</span><br><span class="line">Content-Encoding: gzip</span><br><span class="line">Content-Length: 0</span><br></pre></td></tr></table></figure>
+</li>
+<li><code>預檢請求</code>的響應頭中的關鍵字段：
+<ul>
+<li><code>Access-Control-Allow-Origin</code>: 表示可以允許請求的源，可以填具體的域名，或是用<code>*</code>表示允許任意請求源。</li>
+<li><code>Access-Control-Allow-Methods</code>: 表示允許的請求方法列表。</li>
+<li><code>Access-Control-Allow-Credentials</code>: 同簡單請求的相同字段。</li>
+<li><code>Access-Control-Allow-Headers</code>: 表示允許發送的請求頭字段。</li>
+<li><code>Access-Control-Max-Age</code>: 預檢請求的有效期。在此期間，不用發出另外一條預檢請求。</li>
+</ul>
+</li>
+<li>在<code>預檢請求</code>的響應返回後，如果請求不滿足<code>響應頭</code>的條件，會觸發<code>XMLHttpRequest</code>的<code>onerror</code>方法。瀏覽器不再發送後面的的<code>跨域請求</code>。</li>
+<li>到了發送<code>跨域請求</code>的階段時，跟<code>簡單請求</code>的狀況就是一樣的了。</li>
+<li><code>JSONP</code>原理：<code>script</code>標籤的<code>src</code>字段不遵循同源政策，可以根據<code>src</code>上的目標地址發送<code>GET</code>請求，並拿到響應。</li>
+<li><code>JSONP</code>的兼容性好，可以支援更早期的瀏覽器。但支持的請求方法過於單一。</li>
+<li>通過<code>nginx</code>的反向代理來支持跨域請求。</li>
+<li><code>HTTPS</code> = <code>HTTP</code> + <code>SSL/TLS</code></li>
+<li><code>SSL</code>，即安全套接層（<code>Secure Sockets Layer</code>）。處於<code>OSI</code>模型的會話層。發展到第三個大版本被標準化，成為<code>TLS</code>(傳輸層安全,<code>Transport Layer Security</code>)。主流版本為<code>TLS/1.2</code>，2018推出了<code>TLS/1.3</code>。</li>
+<li><code>TLS/1.2</code>握手過程：
+<ul>
+<li><code>Client Hello</code>: 客戶端會先發送<code>client_random</code>, <code>TSL版本</code>, <code>加密套件列表</code>。</li>
+<li><code>Server Hello</code>: 伺服器發送<code>server_random</code>, <code>server_params</code>, <code>確認TLS版本、使用的加密套件列表、伺服器使用的證書</code>。</li>
+<li><code>Client驗證證書</code>: 客戶端驗證伺服器傳來的<code>證書</code>和<code>簽名</code>是否通過，通過則傳<code>client_params</code>給伺服器</li>
+<li><code>Client生成secret</code>: 客戶端通過<code>client_params</code>, <code>server_params</code>, <code>client_random</code>, <code>server_random</code>和<code>加密套件列表</code>生成最終的<code>secret</code>。</li>
+<li><code>Server生成secret</code>: 伺服器通過相同的方式生成最終<code>secret</code>。</li>
+<li>之後傳輸兩邊都用各自的最終<code>secret</code>作為密鑰進行加解密。</li>
+</ul>
+</li>
+<li><code>TLS/1.2</code>握手過程中需要注意的點：
+<ul>
+<li>加密套件列表的一般格式:  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TLS_ECDHE_WITH_AES_128_GCM_SHA256</span><br></pre></td></tr></table></figure>
+</li>
+<li>加密套件列表含義：<code>TLS</code>握手過程中，使用<code>ECDHE</code>算法生成<code>pre_random</code>。採用<code>128</code>位的<code>AES</code>算法進行對稱加密，在對稱加密過程中使用主流的<code>GCM</code>分組模式。哈希摘要算法則是採用<code>SHA256</code>算法。</li>
+<li>哈希摘要算法在過程中主要是用來驗證身分用的。涉及到數字簽名的部分。</li>
+<li>以上面列出的<code>加密套件列表</code>為例，<code>Client</code>生成<code>secret</code>這個階段，最先是通過<code>ECDHE</code>算法算出<code>pre_random</code>，在這個過程中要傳入兩個參數: <code>server_params</code>和<code>client_params</code>。再用<code>pre_random</code>, <code>server_random</code>, <code>client_random</code>三者通過一個偽隨即數來計算出最終的<code>secret</code>。</li>
+<li><code>TLS</code>握手是一個<code>雙向認證</code>的過程。</li>
+<li>客戶端生成<code>secret</code>後，會給伺服器發送一個<code>收尾</code>的消息，告訴伺服器之後的都用對稱加密，對稱加密的算法就用第一次約定的。伺服器生成完<code>secret</code>也會向客戶端發送一個<code>收尾</code>消息，告訴客戶端之後直接使用對稱加密來通信。這個<code>收尾</code>的消息包括兩部分：<code>Changer Cipher Spec</code>，意味著後面都是加密傳輸。<code>Finished</code>，這個消息是對之前所有發送的數據做的<code>摘要</code>，對<code>摘要進行對稱加密</code>，讓對方驗證一下。當雙方都驗證通過之後，握手過程才算是正式結束。後面的<code>HTTP</code>就正式開始傳輸加密報文。</li>
+<li>使用<code>ECDHE</code>還有一個特點，客戶端發送完<code>收尾</code>消息後，可以提前<code>搶跑</code>，不必等<code>收尾</code>消息，直接發送加密的<code>HTTP</code>報文，節省了一個<code>RTT</code>(<code>round-trip time</code>, 客戶端到伺服器往返所花時間)。這個也叫<code>TLS False Start</code></li>
+</ul>
+</li>
+<li>2018年推出的<code>TLS/1.3</code>，對<code>TLS/1.2</code>做出了一系列的改進，主要分為：<code>強化安全</code>, <code>提高性能</code>。</li>
+<li>在<code>TLS/1.3</code>中廢除了非常多的加密算法，最終只保留了五個加密套件：
+<ul>
+<li>TLS_AES_128_GCM_SHA256</li>
+<li>TLS_AES_256_GCM_SHA384</li>
+<li>TLS_CHACHA20_POLY1305_SHA256</li>
+<li>TLS_AES_128_GCM_SHA256</li>
+<li>TLS_AES_128_GCM_8_SHA256</li>
+</ul>
+</li>
+<li>在<code>TLS/1.3</code>中，改進了握手流程，伺服器不必等客戶端驗證證書之後才能拿到<code>client_params</code>，而是在一開始就能拿到。相比<code>TLS/1.2</code>少了一個RTT，但相對的在第一次握手時客戶端要傳輸更多的信息。由於握手過程對客戶端來說只剩下了一去一回，這種握手方式也叫<code>1-RTT握手</code>。</li>
+<li><code>1-RTT</code>的優化方式之一，會話複用。雙方連接成功後，伺服器加密會話信息，用<code>session ticket</code>消息發送給客戶端，讓客戶端存下來。在下一次重連時，直接把這個<code>session ticket</code>進行解密，驗證它有沒有過期，如果沒過期則直接恢復之前的會話狀態。這個方式在保證<code>1-RTT</code>的同時，節省了重新生成會話密鑰這些算法所消耗的時間，也是一筆可觀的性能提升。</li>
+<li><code>1-RTT</code>的優化方式之二，<code>PSK</code>。在發送<code>session ticket</code>的同時帶上應用數據，不用等到伺服器確認，這種方式稱為<code>Pre-Shared Key</code>。通過這樣的方式可以使重連優化到<code>0-RTT</code>。</li>
+<li>由於<code>HTTPS</code>對於安全方面的處理做的非常好，<code>HTTP</code>的改進關注點放在性能方面。對於<code>HTTP/2</code>，性能方面的提升在兩點：
+<ul>
+<li>頭部壓縮</li>
+<li>多路復用</li>
+</ul>
+</li>
+<li><code>HPACK</code>, <code>HTTP/2</code>的頭部壓縮算法。<br>
+在<code>HTTP/2</code>之前，<code>請求體</code>一般會有響應的壓縮編碼過程，但頭部字段本身卻沒有。當請求字段非常複雜，尤其對於<code>GET</code>請求，請求報文幾乎都是請求頭。<code>HTTP/2</code>針對頭部字段，採用了對應的壓縮算法<code>HPack</code>。</li>
+<li><code>HPACK</code>的主要兩點：
+<ul>
+<li>首先會在伺服器和客戶端之間建立哈希表，將用到的字段放在這張表中。在傳輸的時候，對於之前出現過的值，只需要把索引傳給對方即可。</li>
+<li>對整數和字串進行<code>哈夫曼編碼</code>。<code>哈夫曼編碼</code>的原理就是將所有出現過的字符建立一張索引表，對出現次數多的字符其對應的索引盡可能短，傳輸的時候也是傳輸這樣的索引序列，可以達到非常高的壓縮率。</li>
+</ul>
+</li>
+<li><code>二進制分幀</code>，<code>HTTP/2</code>的多路複用。解決隊頭阻塞問題。<br>
+原來<code>Headers + Body</code>的報文格式被拆分成了一個個二進制的幀。用<code>Headers幀</code>存放頭部字段，<code>Data幀</code>存放請求體數據。拆分後，伺服器看到的不再是一個個完整的<code>HTTP</code>請求報文，而是一堆亂序的<code>二進制幀</code>。這些<code>二進制幀</code>不存在先後關係，因為也就沒有了<code>HTTP</code>的隊頭阻塞的問題。<br>
+通信雙方都可以給對方發送<code>二進制幀</code>，這種<code>二進制幀</code>的<code>雙向傳輸的序列</code>，也叫做<code>流</code>。<code>HTTP/2</code>用<code>流</code>在一個<code>TCP</code>連接上，進行多個<code>數據幀</code>的通信，也就是<code>多路複用</code>的概念。</li>
+<li>上面提到的<code>亂序</code>的<code>二進制幀</code>。這邊的<code>亂序</code>指的是不同<code>ID</code>的<code>流</code>是亂序的，但同一個<code>ID</code>的<code>流</code>是按順序傳輸的。</li>
+<li>在<code>HTTP/2</code>中，伺服器不再是完全被動的接收請求，響應請求。它也能新建<code>流</code>來給客戶端發送消息，也就是<code>伺服器推送</code>(<code>server push</code>)。當一個<code>TCP</code>連接建立後，瀏覽器請求一個<code>HTML</code>文件，伺服器可以在返回<code>HTML</code>文件的基礎上，同時將<code>HTML</code>中引用到的其他資源文件一個返回給瀏覽器，減少瀏覽器的等待。</li>
+<li><code>HTTP</code>結構參考：<br>
+<img src="https://i.imgur.com/PTFOAin.png" alt=""></li>
+<li>二進制幀的幀結果大致如下：<br>
+<img src="https://i.imgur.com/vUsIxDN.png" alt=""></li>
+<li>每個幀分為<code>幀頭</code>(<code>Frame Header</code>)和<code>幀體</code>(<code>Frame Payload</code>)。</li>
+<li><code>幀長度</code>，表示<code>幀體</code>的長度。3個字節。</li>
+<li><code>幀類型</code>，分為<code>數據幀</code>和<code>控制幀</code>兩種。<code>數據幀</code>用來存放<code>HTTP</code>報文，<code>控制幀</code>用來管理<code>流</code>的傳輸。1個字節。</li>
+<li><code>幀標誌</code>，一共有8個標誌位，常用的有<code>END_HEADERS</code>表示頭數據結束，<code>END_STREAM</code>表示單方向數據發送結束。1個字節。</li>
+<li><code>流標示符</code>，也就是<code>Stream ID</code>。接收方在亂序的<code>二進制幀</code>中選出<code>ID</code>相同的幀，按順序組裝成請求/響應報文。4個字節。</li>
+<li><code>流</code>通過標誌位的改變來實現具體的狀態改變。通常的過程是
+<ul>
+<li>剛開始兩者都是空閒。</li>
+<li>客戶端發送<code>HEADERS幀</code>，開始分配<code>Stream ID</code>，客戶端的<code>流</code>打開。</li>
+<li>伺服器接收之後，伺服器的<code>流</code>也打開。</li>
+<li>兩端的<code>流</code>打開後，可以互相傳遞<code>數據幀</code>和<code>控制幀</code>。</li>
+<li>當客戶端要關閉時，向伺服器發送<code>END_STREAM</code>幀，進入<code>半關閉狀態</code>。這時候客戶端只能接收數據，不能發送。</li>
+<li>伺服器接收到這個<code>END_STREAM</code>，也進入<code>半關閉狀態</code>。此時，伺服器只能發送數據，不能接收數據。</li>
+<li>伺服器向客戶端發送<code>END_STREAM</code>幀，表示數據發送完畢，雙方進入<code>關閉狀態</code>。</li>
+<li>如果下次要開啟新的<code>流</code>，<code>Stream ID</code>需要自增，直到上限為止。到達上限後，開一個新的<code>TCP</code>連接重頭開始計數。<code>流標示符</code>長度為4個字節，最高位保留，範圍是0~2的31次方，大約21億個。</li>
+</ul>
+</li>
+<li><code>流</code>的特性：
+<ul>
+<li>並發性。一個<code>HTTP/2</code>連接上可以同時發送多個幀。</li>
+<li>自增性。<code>Stream ID</code>不可重用，會按順序向上自增。</li>
+<li>雙向性。客戶端和伺服器端都可以創建流，互不干擾。</li>
+<li>可設置優先級。可以設置數據幀的優先級，讓伺服器先處理重要資源，優化用戶體驗。</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>作者： </strong>naremloa
+  </li>
+  <li class="post-copyright-link">
+    <strong>文章連結：</strong>
+    <a href="https://naremloa.github.io/2020/05/20/jotting_1/" title="文章隨筆(1">https://naremloa.github.io/2020/05/20/jotting_1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/zh-TW" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/HTTP/" rel="tag"><i class="fa fa-tag"></i> HTTP</a>
+              <a href="/tags/%E6%96%87%E7%AB%A0%E9%9A%A8%E7%AD%86/" rel="tag"><i class="fa fa-tag"></i> 文章隨筆</a>
+          </div>
+
+        
+
+
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="naremloa"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">naremloa</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分類</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/naremloa" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;naremloa" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:naremloa@gmail.com" title="E-Mail → mailto:naremloa@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://steamcommunity.com/id/naremloa" title="Steam → https:&#x2F;&#x2F;steamcommunity.com&#x2F;id&#x2F;naremloa" rel="noopener" target="_blank"><i class="fab fa-steam fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/zh-TW" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-nd.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fas fa-terminal"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">naremloa</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://naremloa-github-io.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://naremloa.github.io/2020/05/20/jotting_1/";
+    this.page.identifier = "2020/05/20/jotting_1/";
+    this.page.title = "文章隨筆(1";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://naremloa-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+    </div>
+</body>
+</html>

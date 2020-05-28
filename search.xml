@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Deno 1.0</title>
+    <url>/2020/05/18/deno_1_0/</url>
+    <content><![CDATA[<blockquote>
+<p>原文: <a href="https://deno.land/v1" target="_blank" rel="noopener">Deno 1.0</a> @written by Ryan Dahl, Bert Belder, and Bartek Iwańczuk<br>
+譯者: naremloa</p>
+</blockquote>
+<p>動態語言是一種很有用的工具。腳本能使用戶迅速且簡潔的將複雜的系統黏合在一起，並且能在不需要考慮包括像記憶體管理、系統建置等技術細節的環境下充分的展現創意。近幾年，像Rust、Go等的程式語言讓用戶能更容易的生產出複雜的原生機器語言，這些專案也在計算機基礎設施(<code>computer infrastructure</code>)的發展上有著很重大的作用。然而我們認為，能有一個可以解決多種範圍的問題領域(<code>problem domains</code>)的強大的腳本環境，還是很重要的。</p>
+<p>Dynamic languages are useful tools. Scripting allows users to rapidly and succinctly tie together complex systems and express ideas without worrying about details like memory management or build systems. In recent years programming languages like Rust and Go have made it much easier to produce sophisticated native machine code; these projects are incredibly important developments in computer infrastructure. However, we claim it is still important to have a powerful scripting environment that can address a wide range of problem domains.</p>
+<p>JavaScript是一種最為廣泛使用的動態語言，僅需要一個瀏覽器就能運行在所有設備上。極大數量擅長JavaScript的工程師，花了大部分的功夫在優化其執行上。通過像ECMA這樣的標準組織，該語言正在小心的且持續的發展中。我們相信，不管是在瀏覽器環境下還是獨立的進程中，JavaScript都會是動態語言工具的首選。</p>
+<p>JavaScript is the most widely used dynamic language, operating on every device with a web browser. Vast numbers of programmers are fluent in JavaScript and much effort has been put into optimizing its execution. Through standards organizations like ECMA International, the language has been carefully and continuously improved. We believe JavaScript is the natural choice for dynamic language tooling; whether in a browser environment or as standalone processes.</p>
+<p>我們原本在這塊的作品，Node.js，已是一個非常成功的軟體平台(<code>software platform</code>)。大家已經認識到不管是在建置web開發工具、建置獨立的web伺服器還是其他無數的案例上，它非常的有用。node設計的時間是在2009年，而當時的JavaScript相比現在已不可同日而語。出於需要，當時的node必須先實現之後被標準組織添加到語言中的部分概念。有關於這方面的細節，在<a href="https://www.youtube.com/watch?v=M3BM9TB-8yA" target="_blank" rel="noopener">Design Mistakes in Node</a>中有所討論。鑑於node擁有數量龐大的使用者，想要對這個系統做改變是非常困難且緩慢的。</p>
+<p>Our original undertaking in this area, Node.js, proved to be a very successful software platform. People have found it useful for building web development tooling, building standalone web servers, and for a myriad of other use-cases. Node, however, was designed in 2009 when JavaScript was a much different language. Out of necessity, Node had to invent concepts which were later taken up by the standards organizations and added to the language differently. In the presentation <a href="https://www.youtube.com/watch?v=M3BM9TB-8yA" target="_blank" rel="noopener">Design Mistakes in Node</a>, this is discussed in more detail. Due to the large number of users that Node has, it is difficult and slow to evolve the system.</p>
+<p>隨著JavaScript的發展，和新的東西如TypeScript的加入，建置Node專案變得越發艱鉅，其中就包括管理建置系統和其他繁重的工具。這些都降低了動態腳本語言的趣味。此外，通過NPM倉庫來鏈接外部庫這種中心化的機制，並不符合web的理念。</p>
+<p>With the changing JavaScript language, and new additions like TypeScript, building Node projects can become an arduous endeavor, involving managing build systems and other heavy handed tooling that takes away from the fun of dynamic language scripting. Furthermore the mechanism for linking to external libraries is fundamentally centralized through the NPM repository, which is not inline with the ideals of the web.</p>
+<p>我們認為現階段的JavaScript和其周圍的軟體基礎設施的改變已經足以開始做簡化了。我們想要找一種有趣且有效的腳本環境，用來應對多種範圍的任務。</p>
+<p>We feel that the landscape of JavaScript and the surrounding software infrastructure has changed enough that it was worthwhile to simplify. We seek a fun and productive scripting environment that can be used for a wide range of tasks.</p>
+<h2 id="A-Web-Browser-for-Command-Line-Scripts"><a class="header-anchor" href="#A-Web-Browser-for-Command-Line-Scripts"></a>A Web Browser for Command-Line Scripts</h2>
+<p>Deno是一個新的在瀏覽器之外執行JavaScript和TypeScript的執行環境。</p>
+<p>Deno is a new runtime for executing JavaScript and TypeScript outside of the web browser.</p>
+<p>Deno嘗試提供一個標準化工具來迅速的編寫複雜的功能。Deno是(以後也會是)一個單一的可執行檔案。就像瀏覽器一樣，它知道如何取得外部程式。在Deno中，一個單一的檔案可以在不使用其他工具下編寫任意複雜的行為。</p>
+<p>Deno attempts to provide a standalone tool for quickly scripting complex functionality. Deno is (and always will be) a single executable file. Like a web browser, it knows how to fetch external code. In Deno, a single file can define arbitrarily complex behavior without any other tooling.</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; serve &#125; <span class="keyword">from</span> <span class="string">"https://deno.land/std@0.50.0/http/server.ts"</span>;</span><br><span class="line"><span class="keyword">for</span> <span class="keyword">await</span> (<span class="keyword">const</span> req <span class="keyword">of</span> serve(&#123; <span class="attr">port</span>: <span class="number">8000</span> &#125;)) &#123;</span><br><span class="line">  req.respond(&#123; <span class="attr">body</span>: <span class="string">"Hello World\n"</span> &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述是一個完整的HTTP伺服器模組，它在單獨的一行裡新增了一個依賴。你不需要其他的設定檔案或預先安裝東西，只需要執行<code>deno run example.js</code></p>
+<p>Here a complete HTTP server module is added as a dependency in a single line. There are no additional configuration files, there is no install to do beforehand, just <code>deno run example.js</code>.</p>
+<p>就像在瀏覽器那樣，程式預設是執行在一個安全沙箱中。腳本不能讀取硬碟、打開網路連接，或是執行其他在未經授權下可能有的惡意行為。瀏覽器提供APIs來連接攝像頭和麥克風，但這一定會先需要取得用戶的授權。Deno在終端提供類似的行為：上述的這些例子如果沒有在命令行提供<code>--allow-net</code>這個參數都會失敗。</p>
+<p>Also like browsers, code is executed in a secure sandbox by default. Scripts cannot access the hard drive, open network connections, or make any other potentially malicious actions without permission. The browser provides APIs for accessing cameras and microphones, but users must first give permission. Deno provides analogous behaviour in the terminal. The above example will fail unless the <code>--allow-net</code> command-line flag is provided.</p>
+<p>Deno很小心的不偏離標準化瀏覽器的JavaScript APIs。當然，不是所有的瀏覽器API都跟Deno相關，但只要有相關的部分，Deno都不會偏離標準。</p>
+<p>Deno is careful to not deviate from standardized browser JavaScript APIs. Of course, not every browser API is relevant for Deno, but where they are, Deno does not deviate from the standard.</p>
+<h2 id="First-Class-TypeScript-Support"><a class="header-anchor" href="#First-Class-TypeScript-Support"></a>First Class TypeScript Support</h2>
+<p>我們想要Deno能使用在多種範圍的問題領域上：從小小的一行腳本，到複雜的伺服器端業務邏輯(<code>business logic</code>)。隨著程式變得越來越複雜，有這某種形式的型別檢查變的日益重要。TypeScript是一種JavaScript的擴展，它允許使用者可選擇的提供型別資訊。</p>
+<p>We want Deno to be applicable to a wide range of problem domains: from small one-line scripts, to complex server-side business logic. As programs become more complex, having some form of type checking becomes increasingly important. TypeScript is an extension of the JavaScript language that allows users to optionally provide type information.</p>
+<p>Deno原生支持TypeScript。<code>deno types</code>指令可以查看所有Deno提供的型別宣告。Deno的標準模組都是用TypeScript編寫的。</p>
+<p>Deno supports TypeScript without additional tooling. The runtime is designed with TypeScript in mind. The <code>deno types</code> command provides type declarations for everything provided by Deno. Deno’s standard modules are all written in TypeScript.</p>
+<h2 id="Promises-All-The-Way-Down"><a class="header-anchor" href="#Promises-All-The-Way-Down"></a>Promises All The Way Down</h2>
+<p>在Node設計之初，JavaScript還未有Promises和async/await的概念。Node中對應promises的是EventEmitter。一些重要的APIs像sockets和HTTP則是圍繞在一旁。先不談async/await所帶來的好處，EventEmitter模式有著背壓(<code>back-pressure</code>)問題。以TCP套接字來舉例。套接字會在收到incoming packets時發出<code>資料</code>。這些<code>資料</code>的回調會以一種不受控制的方式發出，讓事件(<code>events</code>)充滿氾濫整個進程。因為Node持續不斷的接收新的資料事件，底層的TCP套接字沒有相對應的背壓，而遠程的發送方不知道伺服器已過載，仍在持續的發送資料。為了緩解這個問題，新增了<code>pause()</code>這個方法。它可以解決這個問題，但需要額外的程式，並且因為flooding問題只有出現在進程非常繁忙的時候，許多的Node程式都會有資料氾濫的問題。最終導致整個系統有著非常不好的尾部延遲。</p>
+<p>Node was designed before JavaScript had the concept of Promises or async/await. Node’s counterpart to promises was the EventEmitter, which important APIs are based around, namely sockets and HTTP. Setting aside the ergonomic benefits of async/await, the EventEmitter pattern has an issue with back-pressure. Take a TCP socket, for example. The socket would emit “data” events when it received incoming packets. These “data” callbacks would be emitted in an unconstrained manner, flooding the process with events. Because Node continues to receive new data events, the underlying TCP socket does not have proper back-pressure, the remote sender has no idea the server is overloaded and continues to send data. To mitigate this problem, a <code>pause()</code> method was added. This could solve the problem, but it required extra code; and since the flooding issue only presents itself when the process is very busy, many Node programs can be flooded with data. The result is a system with bad tail latency.</p>
+<p>在Deno中，套接字依舊是非同步的，但在接收新資料上仍要求使用者顯示的調用<code>read()</code>。在構建一個接收套接字上不需要一個額外的暫停語意。這不僅僅只有在TCP套接字上，在系統的最底的綁定層也是從根本上綁定了promised - 我們對這些綁定稱之為<code>ops</code>。所有在Deno任何形式的回調都來自promises。</p>
+<p>In Deno, sockets are still asynchronous, but receiving new data requires users to explicitly <code>read()</code>. No extra pause semantics are necessary to properly structure a receiving socket. This is not unique to TCP sockets. The lowest level binding layer to the system is fundamentally tied to promises - we call these bindings “ops”. All callbacks in Deno in some form or another arise from promises.</p>
+<p>在Rust中，它有自己的類promise的抽象概念，叫Futures。通過<code>op</code>這個抽象概念，可以很簡單的將在Rust中基於future的APIs與JavaScript的promises進行綁定。</p>
+<p>Rust has its own promise-like abstraction, called Futures. Through the “op” abstraction, Deno makes it easy to bind Rust future-based APIs into JavaScript promises.</p>
+<h2 id="Rust-APIs"><a class="header-anchor" href="#Rust-APIs"></a>Rust APIs</h2>
+<p>我們編寫的一個主要的組件是Deno命令行介面(CLI)。今天CLI的版本來到了1.0。但Deno不是一個單獨的程式，它被設計成是一種Rust套件的集合，可以在不同的層次中進行整合。</p>
+<p>The primary component that we ship is the Deno command-line interface (CLI). The CLI is the thing that is version 1.0 today. But Deno is not a monolithic program, but designed as a collection of Rust crates to allow integration at different layers.</p>
+<p><a href="https://crates.io/crates/deno_core" target="_blank" rel="noopener">deno_core套件</a>(<code>crate</code>)在Deno中是一個非常重要(<code>very bare bones</code>)的一塊。它不依賴TypeScript和<a href="https://tokio.rs/" target="_blank" rel="noopener">Tokio</a>，只提供了Op和資源基礎架構。也就是，它提供了一種系統化的將Rust futures綁定到JavaScript promises上的方法。CLI完全就是構建在deno_core之上。</p>
+<p>The <a href="https://crates.io/crates/deno_core" target="_blank" rel="noopener">deno_core</a> crate is a very bare bones version of Deno. It does not have dependencies on TypeScript nor on <a href="https://tokio.rs/" target="_blank" rel="noopener">Tokio</a>. It simply provides our Op and Resource infrastructure. That is, it provides an organized way of binding Rust futures to JavaScript promises. The CLI is of course built entirely on top of deno_core.</p>
+<p><a href="https://crates.io/crates/rusty_v8" target="_blank" rel="noopener">rusty_v8</a>套件提供了將Rust綁定到V8的C++ 上的高性能API。這些API盡可能的不偏離原來的C++ API。這是一種零成本(<code>zero-cost</code>)的綁定 - 那些在Rust中暴露的物件與在 C++ 中操作的物件完全相同。（例如，之前嘗試在Rust V8的綁定中，強制使用Persistent handles。）這個套件提供在Github Actions CI中內置的二進制資料，它還允許使用者從頭開始編譯V8，並調整各種編譯配置。V8的原始碼分布在套件中。最終rusty_v8試著成為一個完全的接口。它目前還不是100%安全，但已經很接近了。能夠與像V8這樣複雜的VM進行交互是很棒的，它讓我們發現了許多在Deno中的bug。</p>
+<p>The <a href="https://crates.io/crates/rusty_v8" target="_blank" rel="noopener">rusty_v8</a> crate provides high quality Rust bindings to V8’s C++ API. The API tries to match the original C++ API as closely as possible. It’s a zero-cost binding - the objects that are exposed in Rust are exactly the object you manipulate in C++. (Previous attempts at Rust V8 bindings forced the use of Persistent handles, for example.) The crate provides binaries that are built in Github Actions CI, but it also allows users to compile V8 from scratch and adjust its many build configurations. All of the V8 source code is distributed in the crate itself. Finally rusty_v8 attempts to be a safe interface. It’s not yet 100% safe, but we’re getting close. Being able to interact with a VM as complex as V8 in a safe way is quite amazing and has allowed us to discover many difficult bugs in Deno itself.</p>
+<h2 id="Stability"><a class="header-anchor" href="#Stability"></a>Stability</h2>
+<p>我們承諾在Deno上會維護一個穩定的API。Deno有很多的接口和組件，因此來明確我們所定義的<code>穩定</code>是很重要的。我們實現的，用來與作業系統間進行交互的JavaScript APIs都可以在<code>Deno</code>這個命名空間中找到(如 <code>Deno.open()</code>)。這些都已經過了仔細的審查，我們將不會做出不向下兼容的改動。</p>
+<p>We promise to maintain a stable API in Deno. Deno has a lot of interfaces and components, so it’s important to be transparent about what we mean by “stable”. The JavaScript APIs that we have invented to interact with the operating system are all found inside the “Deno” namespace (e.g. <code>Deno.open()</code>). These have been carefully examined and we will not be making backwards incompatible changes to them.</p>
+<p>所有還沒穩定下來的動能都隱藏在<code>--unstable</code>這個命令行參數下。你可以<a href="https://doc.deno.land/https/raw.githubusercontent.com/denoland/deno/master/cli/js/lib.deno.unstable.d.ts" target="_blank" rel="noopener">在這</a>找到不穩定接口的文檔。在之後的版本中，部分的APIs將會被穩定下來。</p>
+<p>All functionality which is not yet ready for stabilization has been hidden behind the <code>--unstable </code>command-line flag. You can see the documentation for the unstable interfaces <a href="https://doc.deno.land/https/raw.githubusercontent.com/denoland/deno/master/cli/js/lib.deno.unstable.d.ts" target="_blank" rel="noopener">here</a>. In subsequent releases, some of these APIs will be stabilized as well.</p>
+<p>在全局命名空間你可以發現其他所有的物件（像是<code>setTimeout()</code>或 <code>fetch()</code>）。我們努力嘗試者讓這些接口與在瀏覽器中保持一致。但如果有發現不兼容的部分我們也會做出改正。是瀏覽器標準定義了這些接口，不是我們。所有我們提出的改正都會是bug修復，而非接口變動。如果瀏覽器標準API存在不兼容，將會在下一個主版本釋出前做出修正。</p>
+<p>In the global namespace you’ll find all sorts of other objects (e.g. <code>setTimeout()</code> and <code>fetch()</code>). We’ve tried very hard to keep these interfaces identical to those in the browser; but we will issue corrections if we discover inadvertent incompatibilities. The browser standards define these interfaces, not us. Any corrections issued by us are bug fixes, not interface changes. If there is an incompatibility with a browser standard API, that incompatibility may be corrected before a major release.</p>
+<p>Deno也有許多的Rust APIs，像是deno_core或rusty_v8。但這些APIs都還未達到1.0版本。我們會持續的迭代他們。</p>
+<p>Deno also has many Rust APIs, namely the deno_core and rusty_v8 crates. None of these APIs are at 1.0 yet. We will continue to iterate on them.</p>
+<h2 id="Limitations"><a class="header-anchor" href="#Limitations"></a>Limitations</h2>
+<p>認識到Deno不是一個Node的分支是非常重要的，Deno完全是一個新的實現。Deno的開發只有兩年的時間，而Node已超過了十年之久。由於各方對Deno的興趣，我們期望它能持續的發展成熟。</p>
+<p>It’s important to understand that Deno is not a fork of Node - it’s a completely new implementation. Deno has been under development for just two years, while Node has been under development for over a decade. Given the amount of interest in Deno, we expect it to continue to evolve and mature.</p>
+<p>對於部分應用，Deno會是一個很好的選擇，但不會是對全部的應用。這取決於應用的需求。我們認為透明的闡述這些局限性，可以幫助人們在考慮是否使用Deno上做出明智的決定。</p>
+<p>For some applications Deno may be a good choice today, for others not yet. It will depend on the requirements. We want to be transparent about these limitations to help people make informed decisions when considering to use Deno.</p>
+<h3 id="Compatibility"><a class="header-anchor" href="#Compatibility"></a>Compatibility</h3>
+<p>不幸的是，對於現有的JavaScript工具缺乏兼容性。總體來說，對於Node(NPM)包，Deno是不兼容的。在<a href="https://deno.land/std/node/" target="_blank" rel="noopener">https://deno.land/std/node/</a>是有一個處於初期階段的兼容層，但距離完成還有一段距離。</p>
+<p>Unfortunately, many users will find a frustrating lack of compatibility with existing JavaScript tooling. Deno is not compatible, in general, with Node (NPM) packages. There is a nascent compatibility layer being built at<br>
+<a href="https://deno.land/std/node/" target="_blank" rel="noopener">https://deno.land/std/node/</a> but it is far from complete.</p>
+<p>儘管Deno在簡化模組系統這塊採取了較為強硬的態度，但Deno和Node依舊是兩個非常相似的系統，也在解決著相似的問題。隨著時間推移，我們期望Deno能夠對越來越多的Node程式做到開箱即用。</p>
+<p>Although Deno has taken a hardline approach to simplifying the module system, ultimately Deno and Node are pretty similar systems with similar goals. Over time, we expect Deno to be able to run more and more Node programs out-of-the-box.</p>
+<h3 id="HTTP-Server-Performance"><a class="header-anchor" href="#HTTP-Server-Performance"></a>HTTP Server Performance</h3>
+<p>我們持續的追蹤Deno的HTTP伺服器的<a href="https://deno.land/benchmarks" target="_blank" rel="noopener">表現</a>。一個hello-world的Deno HTTP伺服器每秒處理大約25000個請求，最大延遲為1.3毫秒。相比同樣情況下的Node服務，每秒能處理大約34000個請求，最大延遲浮動在2-300毫秒。</p>
+<p><a href="https://deno.land/benchmarks" target="_blank" rel="noopener">We continuously track the performance of Deno’s HTTP server</a>. A hello-world Deno HTTP server does about 25k requests per second with a max latency of 1.3 milliseconds. A comparable Node program does 34k requests per second with a rather erratic max latency between 2 and 300 milliseconds.</p>
+<p>Deno的HTTP伺服器是在原生的TCP套接字(<code>sockets</code>)上用TypeScript實現的。Node的HTTP伺服器是用C編寫，並通過高階綁定(<code>high-level bindings</code>)的方式暴露給JavaScript。我們拒絕在Deno上綁定原生的HTTP伺服器，因為我們希望在未來能優化TCP套接字，更通俗的講是op接口。</p>
+<p>Deno’s HTTP server is implemented in TypeScript on top of native TCP sockets. Node’s HTTP server is written in C and exposed as high-level bindings to JavaScript. We have resisted the urge to add native HTTP server bindings to Deno, because we want to optimize the TCP socket layer, and more generally the op interface.</p>
+<p>Deno是個還不錯的非同步伺服器，25000個/秒的請求處理已能滿足大部分的服務。(如果還不行，那JavaScript就不會是個最佳選擇。)此外，由於普遍的使用了promises(上述)，我們期望Deno能展示出更佳的尾部延遲。綜上，我們相信在這個系統上還能有更多的優勢，並且希望能在之後的版本中實現這個目標。</p>
+<p>Deno is a proper asynchronous server and 25k requests per second is quite enough for most purposes. (If it’s not, probably JavaScript is not the best choice.) Furthermore, we expect Deno to generally exhibit better tail latency due to the ubiquitous use of promises (discussed above). All that said, we do believe there are more performance wins to be had in the system, and we hope to achieve that in future releases.</p>
+<h2 id="TSC-Bottleneck"><a class="header-anchor" href="#TSC-Bottleneck"></a>TSC Bottleneck</h2>
+<p>Deno內部使用了微軟的TypeScript編譯器來做型別檢查和生產出對應的JavaScript。相比用V8去解析JavaScript的時間，它是非常慢的。在專案早期，我們希望<code>V8 Snapshots</code>能為這塊部分帶來顯著的提升。<code>Snapshots</code>確實有所幫助，但依舊是很慢。我們當然可以在現有的TypeScript編譯器上做出改進，但我們明白最終還是需要通過Rust來實現型別檢查。這會是一項艱鉅的、非短期能完成的任務。但它能給開發人員在關鍵路徑的體驗(<code>critical path experienced</code>)上提升一個量級。<code>TSC</code>必須移植到Rust上。如果你對這塊問題有興趣，請聯繫我們。</p>
+<p>Internally Deno uses Microsoft’s TypeScript compiler to check types and produce JavaScript. Compared to the time it takes V8 to parse JavaScript, it is very slow. Early on in the project we had hoped that “V8 Snapshots” would provide significant improvements here. Snapshots have certainly helped but it’s still unsatisfyingly slow. We certainly think there are improvements that can be done here on top of the existing TypeScript compiler, but it’s clear to us that ultimately the type checking needs to be implemented in Rust. This will be a massive undertaking and will not happen any time soon; but it would provide order of magnitude performance improvements in a critical path experienced by developers. TSC must be ported to Rust. If you’re interested in collaborating on this problem, please get in touch.</p>
+<h2 id="Plugins-Extensions"><a class="header-anchor" href="#Plugins-Extensions"></a>Plugins / Extensions</h2>
+<p>我們有一個處於初期階段的套件(<code>plugin</code>)系統，通過客製化設定來擴展Deno的執行期。然而，這套接口目前仍處在開發階段並已被標記為不穩定。因此要通過非Deno提供的方式訪問原生系統是很困難的。</p>
+<p>We have a nascent plugin system for extending the Deno runtime with custom ops. However this interface is still under development and has been marked as unstable. Therefore, accessing native systems beyond that which is provided by Deno is difficult.</p>
+<h2 id="Acknowledgements"><a class="header-anchor" href="#Acknowledgements"></a>Acknowledgements</h2>
+<p>Many thanks to the many contributors who helped make this release possible. Espcially: @kitsonk who has had a massive hand in many parts of the system, including (but not limited to) the TypeScript compiler host, deno_typescript, deno bundle, deno install, deno types, streams implementation. @kevinkassimo has contributed countless bug fixes over the whole history of the project. Among his contributions are the timer system, TTY integration, wasm support. Deno.makeTempFile, Deno.kill, Deno.hostname, Deno.realPath, std/node’s require, window.queueMircotask, and REPL history. He also created the logo. @kt3k implemented the continuous benchmark system (which has been instrumental in almost every major refactor), signal handlers, the permissions API, and many critical bug fixes. @nayeemrmn contributes bug fixes in many parts of Deno, most notably he greatly improved the stack trace and error reporting, and has been a forceful help towards the stabilizing the APIs for 1.0. @justjavac has contributed many small but critical fixes to align deno APIs with web standards and most famously he wrote the VS Code deno plugin. @zekth has contributed a lot of modules to std, among them the std/encoding/csv, std/encoding/toml, std/http/cookies, as well as many other bug fixes. @axetroy has helped with all things related to prettier, contributed many bug fixes, and has maintained the VS Code plugin. @afinch7 implemented the plugin system. @keroxp implemented the websocket server and provided many bug fixes. @cknight has provided a lot of documentation and std/node polyfills. @lucacasonato built almost the entire deno.land website. @hashrock has done a lot of amazing artwork, like the loading page on doc.deno.land and the lovely image at the top of this page!</p>
+]]></content>
+      <categories>
+        <category>Deno</category>
+      </categories>
+      <tags>
+        <tag>Deno</tag>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo建置</title>
+    <url>/2020/05/21/hexo_configuration/</url>
+    <content><![CDATA[<blockquote>
+<p><a href="https://www.npmjs.com/package/hexo-cli" target="_blank" rel="noopener">hexo-cli@3.1.0</a> + <a href="https://github.com/next-theme/hexo-theme-next/releases/tag/v8.0.0-rc.2" target="_blank" rel="noopener">hexo-theme-next@v8.0.0-rc.2</a></p>
+</blockquote>
+<h2 id="專案建立"><a class="header-anchor" href="#專案建立"></a>專案建立</h2>
+<p>參照<a href="https://hexo.io/zh-tw/docs/setup" target="_blank" rel="noopener">官網</a>的介紹在本地將專案建起，並完成<a href="https://github.com/next-theme/hexo-theme-next" target="_blank" rel="noopener">NexT</a>的安裝介紹。</p>
+<p>Hexo的主題這塊會有個 <em>submodule</em> 問題，如果要同時兼顧客製化修改和持續性更新，有一篇<a href="https://zhangnai.xin/2018/11/11/hexo-theme-upgrade/" target="_blank" rel="noopener">「暴力而不失優雅的升級Hexo主題」</a>有討論相關內容，這邊暫不贅述。</p>
+<h2 id="客製化主題"><a class="header-anchor" href="#客製化主題"></a>客製化主題</h2>
+<p>客製化主要是從主題的<code>_config.yml</code>和其他模板檔案下手。方式有很多種(前面介紹的文章)，但在下手修改時，建議先考慮到主題後續更新的問題。</p>
+<p>如果沒有需要過多的客製化，推薦採用<code>data files</code>方式。相關<a href="https://github.com/iissnan/hexo-theme-next/issues/328" target="_blank" rel="noopener">issue</a>。</p>
+<p>這邊純紀錄改動過的設定：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># next.yml</span></span><br><span class="line"><span class="comment"># 客製化檔案路徑</span></span><br><span class="line"><span class="attr">custom_file_path:</span></span><br><span class="line">  <span class="comment"># 客製化head標籤的內容</span></span><br><span class="line">  <span class="comment"># 這邊主要是解決google search console的驗證問題</span></span><br><span class="line">  <span class="attr">head:</span> <span class="string">source/_data/head.njk</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 各種icon</span></span><br><span class="line"><span class="attr">favicon:</span></span><br><span class="line">  <span class="attr">small:</span> <span class="string">&lt;favicon</span> <span class="string">16x16&gt;</span></span><br><span class="line">  <span class="attr">medium:</span> <span class="string">&lt;favicon</span> <span class="string">32x32&gt;</span></span><br><span class="line">  <span class="attr">apple_touch_icon:</span> <span class="string">&lt;apple_touch_icon&gt;</span></span><br><span class="line">  <span class="attr">safari_pinned_tab:</span> <span class="string">&lt;safari_pinned_tab&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 底部條顯示設定</span></span><br><span class="line"><span class="attr">footer:</span></span><br><span class="line">  <span class="comment"># 底部網站建立時間</span></span><br><span class="line">  <span class="attr">since:</span> <span class="string">&lt;setup</span> <span class="string">date&gt;</span></span><br><span class="line">  <span class="comment"># 底部icon</span></span><br><span class="line">  <span class="attr">icon:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">fas</span> <span class="string">fa-terminal</span></span><br><span class="line">    <span class="attr">animated:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">color:</span> <span class="string">'#999999'</span></span><br><span class="line">  <span class="comment"># 底部是否顯示 Powered by Hexo &amp; NexT</span></span><br><span class="line">  <span class="attr">powered:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 創用CC設定</span></span><br><span class="line"><span class="attr">creative_commons:</span></span><br><span class="line">  <span class="attr">license:</span> <span class="string">by-nc-nd</span></span><br><span class="line">  <span class="attr">sidebar:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">post:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">language:</span> <span class="string">"zh-TW"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># NexT主題</span></span><br><span class="line"><span class="attr">scheme:</span> <span class="string">Pisces</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 暗黑模式</span></span><br><span class="line"><span class="attr">darkmode:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 側欄菜單設定</span></span><br><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-home</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-tags</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-archive</span></span><br><span class="line"><span class="attr">menu_settings:</span></span><br><span class="line">  <span class="attr">icons:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">badges:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 頭像設定</span></span><br><span class="line"><span class="attr">avatar:</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">&lt;your</span> <span class="string">avatar&gt;</span></span><br><span class="line">  <span class="attr">rounded:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">rotated:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 社交鏈接</span></span><br><span class="line"><span class="attr">social:</span></span><br><span class="line">  <span class="attr">GitHub:</span> <span class="string">&lt;link&gt;</span> <span class="string">||</span> <span class="string">fab</span> <span class="string">fa-github</span></span><br><span class="line">  <span class="attr">E-Mail:</span> <span class="string">mailto:&lt;mail&gt;</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-envelope</span></span><br><span class="line">  <span class="attr">Steam:</span> <span class="string">&lt;link&gt;</span> <span class="string">||</span> <span class="string">fab</span> <span class="string">fa-steam</span></span><br><span class="line">  </span><br><span class="line"><span class="comment"># 控制標籤，用icon替代#</span></span><br><span class="line"><span class="attr">tag_icon:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 控制是否在底部顯示前一篇或後一篇文章</span></span><br><span class="line"><span class="attr">post_navigation:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回頂部按鈕設置</span></span><br><span class="line"><span class="attr">back2top:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">sidebar:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">scrollpercent:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 設置書籤</span></span><br><span class="line"><span class="attr">bookmark:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">color:</span> <span class="string">"#222"</span></span><br><span class="line">  <span class="attr">save:</span> <span class="string">auto</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># disqus設置</span></span><br><span class="line"><span class="attr">disqus:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">shortname:</span> <span class="string">&lt;your</span> <span class="string">shortname&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># searchdb設置</span></span><br><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line"><span class="comment"># site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">&lt;標題&gt;</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&lt;副標題&gt;</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">naremloa</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">"zh-TW"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># URL</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">&lt;your</span> <span class="string">site</span> <span class="string">url&gt;</span></span><br><span class="line"><span class="comment"># 文章永久鏈接格式</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:day/:id/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 擴充套件</span></span><br><span class="line"><span class="attr">Plugins:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">hexo-generator-sitemap</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 主題名稱</span></span><br><span class="line"><span class="attr">theme:</span> <span class="string">next</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Hexo部署指令的相關設定</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span> <span class="string">&lt;my</span> <span class="string">repository</span> <span class="string">url&gt;</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+<h2 id="套件介紹"><a class="header-anchor" href="#套件介紹"></a>套件介紹</h2>
+<h3 id="hexo-generator-sitemap"><a class="header-anchor" href="#hexo-generator-sitemap"></a>hexo-generator-sitemap</h3>
+<p>會在<code>hexo generate</code>的過程中，順帶生成一份<code>sitemap.xml</code>。可以給 <em>google search console</em> 做搜索優化用。</p>
+<p>注意，在 <em>google search console</em> 中提交 <em>sitemap</em> 時，填寫的網址要帶上<code>.xml</code>，如<code>&lt;your url&gt;/sitemap.xml</code>，不然讀取不到。</p>
+<h3 id="hexo-deployer-git"><a class="header-anchor" href="#hexo-deployer-git"></a>hexo-deployer-git</h3>
+<p>配合<code>hexo deploy</code>使用，簡化部署流程。如果不走支持的部署方式，就不需要該套件了。</p>
+<h3 id="hexo-generator-searchdb"><a class="header-anchor" href="#hexo-generator-searchdb"></a>hexo-generator-searchdb</h3>
+<p>提供站內搜索。支持模糊匹配，兩個關鍵字中間要有個空格隔開。</p>
+<h2 id="參考鏈接"><a class="header-anchor" href="#參考鏈接"></a>參考鏈接</h2>
+<ol>
+<li><a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">Hexo</a></li>
+<li><a href="https://theme-next.js.org/" target="_blank" rel="noopener">NexT</a></li>
+<li><a href="https://zhangnai.xin/2018/11/11/hexo-theme-upgrade/" target="_blank" rel="noopener">暴力而不失優雅的升級Hexo主題</a></li>
+<li><a href="https://github.com/iissnan/hexo-theme-next/issues/328" target="_blank" rel="noopener">Theme configurations using Hexo data files</a></li>
+<li><a href="https://blog.typeart.cc/hexoSeries/" target="_blank" rel="noopener">Hexo系列文章</a></li>
+<li><a href="https://tding.top/docs/getting-started/data-files.html" target="_blank" rel="noopener">數據文件</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>文章隨筆(1</title>
+    <url>/2020/05/20/jotting_1/</url>
+    <content><![CDATA[<blockquote>
+<p>原文: <a href="https://juejin.im/post/5e76bd516fb9a07cce750746#heading-91" target="_blank" rel="noopener">（建议精读）HTTP灵魂之问，巩固你的 HTTP 知识体系</a></p>
+</blockquote>
+<ol>
+<li><code>HTTP</code>一般分為：<code>請求</code>和<code>響應</code>兩種。</li>
+<li><code>HTTP</code>的報文結構，同樣也分兩種。</li>
+<li><code>HTTP</code>各類狀態碼，及含義。</li>
+<li><code>URI</code>結構，以及<code>URI</code>編碼。尤其是<code>URI</code>的編碼機制。</li>
+<li><code>HTTP</code>的特點：
+<ul>
+<li>靈活和高擴展性。格式上自由，傳輸方式多樣（不侷限於文本）</li>
+<li>基於<code>TCP</code>，繼承<code>TCP</code>部分特點，如可靠性等。</li>
+<li>請求-響應 特點。</li>
+<li>無狀態，每次請求都是獨立，無上下文相關。</li>
+</ul>
+</li>
+<li><code>HTTP</code>的缺點：
+<ul>
+<li>在長連接場景下，無狀態帶來不便。</li>
+<li>明文傳輸，造成安全問題。</li>
+<li>長連接場景下的隊頭阻塞問題。</li>
+</ul>
+</li>
+<li><code>MIME</code>標準。與<code>HTTP</code>引入<code>MIME</code>標準解決的問題。涉及<code>Content-Type</code>和<code>accept</code>字短。</li>
+<li><code>Content-Type</code>是對發送端而言，告訴接受端發送的數據格式。<code>accept</code>則是對接受端而言，告訴發送端自己想要的格式。</li>
+<li>壓縮方式也是用同樣的方式處理。涉及字段<code>Content-Encoding</code>和<code>Accept-Encoding</code>。兩者的區別同樣也是用在發送端和接受端的區別。</li>
+<li>支持語言。涉及字段<code>Content-Language</code>和<code>Accept-Language</code>。同上。</li>
+<li>字符集。涉及字段<code>Content-Type</code>的<code>charset</code>屬性和<code>Accept-Charset</code>。 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 發送端</span><br><span class="line">Content-Type: text&#x2F;html; charset&#x3D;utf-8</span><br><span class="line">&#x2F;&#x2F; 接收端</span><br><span class="line">Accept-Charset: charset&#x3D;utf-8</span><br></pre></td></tr></table></figure>
+</li>
+<li>HTTP傳輸的數據，分為定長和不定長。</li>
+<li>定長需要通過<code>Content-Length</code>指定長度，過小會截斷，過長會中斷響應。</li>
+<li>不定長需要設置<code>Transfer-Encoding: chunked</code>。表示會分塊傳輸數據。這個字段會使<code>Content-Length</code>失去作用，並使請求基於長連接的方式動態推送內容。</li>
+<li>對於大文件傳輸，HTTP採取<code>範圍請求</code>方案。涉及字段<code>Accept-Ranges: none</code>。</li>
+<li>對於<code>Range</code>字段，格式為: <code>bytes=x-y</code></li>
+<li>大文件請求，分為請求單段數據，和多段數據。多段數據應用在長連接場景。</li>
+<li>單段數據報文：   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">HTTP&#x2F;1.1 206 Partial Content</span><br><span class="line">Content-Length: 10</span><br><span class="line">Accept-Ranges: bytes</span><br><span class="line">Content-Range: bytes 0-9&#x2F;100</span><br><span class="line">i am xxxxx</span><br></pre></td></tr></table></figure>
+</li>
+<li>多段數據報文：   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">HTTP&#x2F;1.1 206 Partial Content</span><br><span class="line">Content-Type: multipart&#x2F;byteranges; boundary&#x3D;00000010101</span><br><span class="line">Content-Length: 189</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Accept-Ranges: bytes</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--00000010101</span><br><span class="line">Content-Type: text&#x2F;plain</span><br><span class="line">Content-Range: bytes 0-9&#x2F;96</span><br><span class="line"></span><br><span class="line">i am xxxxx</span><br><span class="line">--00000010101</span><br><span class="line">Content-Type: text&#x2F;plain</span><br><span class="line">Content-Range: bytes 20-29&#x2F;96</span><br><span class="line"></span><br><span class="line">eex jspy e</span><br><span class="line">--00000010101--</span><br></pre></td></tr></table></figure>
+注意：<code>Content-Type</code>的屬性<code>boundary</code>指定了多段響應的分隔符。</li>
+<li>HTTP存在兩種表單的提交：<code>application/x-www-form-urlencoded</code>和<code>multipart/form-data</code>。一般為<code>POST</code>請求。</li>
+<li><code>application/x-www-form-urlencoded</code>格式特點：
+<ul>
+<li>數據會被編碼成以<code>&amp;</code>分隔的鍵值對。</li>
+<li>字符以<code>URL</code>方式編碼。</li>
+</ul>
+</li>
+<li><code>multipart/form-data</code>格式特點：
+<ul>
+<li><code>Content-Type</code>字段會包含<code>boundary</code>屬性。且<code>boundary</code>的值有瀏覽器默認指定。</li>
+<li>數據會分為多個部分。每個之間通過分隔符隔開。且每一部分會有頭部報文的一部分。</li>
+<li>數據的最後一部分，在分隔符最後會在加上<code>--</code>作結尾。</li>
+<li>由於上述特點，表單中的每一個元素都會是獨立的資源表述。</li>
+</ul>
+</li>
+<li>通常，傳送圖片等，就是用<code>multipart/form-data</code>做傳輸。</li>
+<li>對於隊頭阻塞，目前有兩個方案來解決。對一個域名<code>增加併發連接</code>數量。對一個域名做<code>域名切片</code>，也就是新增其子域名，多個子域名指向同一個伺服器。</li>
+<li>由於<code>HTTP</code>的無狀態特點，引入了<code>Cookie</code>來處理狀態保留問題。</li>
+<li>客戶端通過請求頭中的<code>Cookie</code>向伺服器發送帶狀態的請求，伺服器也可以通過響應頭的<code>Set-Cookie</code>對客戶端進行<code>Cookie</code>寫入動作。</li>
+<li><code>Cookie</code>的主要屬性：<br>
+<code>生存週期</code>：<code>Expires</code>, <code>Max-Age</code><br>
+<code>作用域</code>：<code>Domain</code>, <code>path</code><br>
+<code>安全相關</code>：<code>Secure</code>, <code>HttpOnly</code>, <code>SameSite</code>,</li>
+<li><code>Cookie</code>的缺點：
+<ul>
+<li>容量過小。上限為<code>4kB</code></li>
+<li>性能缺陷。沒有特定設定下，每個請求都會帶上完整的<code>Cookie</code>信息，該問題可以通過指定<code>Domain</code>和<code>Path</code>解決。</li>
+<li>安全缺陷。由於<code>Cookie</code>是通過純文本的方式傳送，容易在請求過程中被截取和竄改。</li>
+</ul>
+</li>
+<li><code>HTTP代理</code>功能：
+<ul>
+<li>負載均衡。</li>
+<li>保證集群的穩定。</li>
+<li>緩存代理。</li>
+</ul>
+</li>
+<li><code>HTTP代理</code>相關的頭部字段：
+<ul>
+<li><code>Via</code>：在請求中，帶上經手過的代理伺服器。</li>
+<li><code>X-Forwarded-For</code>：紀錄請求方的<code>IP位址</code>。</li>
+<li><code>X-Real-IP</code>：紀錄請求源頭的<code>客戶端IP</code>。</li>
+<li><code>X-Forwarded-Host</code>：功能同上，紀錄<code>客戶端域名</code>。</li>
+<li><code>X-Forwarded-Proto</code>：功能同上，紀錄<code>協議名</code>。</li>
+</ul>
+</li>
+<li><code>緩存代理</code>的控制分為兩部分：源伺服器的控制和客戶端的控制。</li>
+<li><code>Cache-Control</code>：通用字段，伺服器和客戶端都可以通過該字段操作緩存的工作。</li>
+<li><code>private</code>：響應頭。禁止代理伺服器進行緩存。</li>
+<li><code>public</code>：響應頭。允許代理伺服器進行緩存。</li>
+<li><code>proxy-revalidate</code>：響應頭。要求代理伺服器的緩存過期後要到源伺服器中獲取。</li>
+<li><code>s-maxage</code>：響應頭。限定緩存在代理伺服器中可以存放多久。</li>
+<li><code>max-stale</code>：請求頭。就是緩存過期了，還是可以繼續緩存和響應。</li>
+<li><code>min-fresh</code>：請求頭。緩存過期前，如果在指定時間之前，還是正查功能響應，如果在指定時間內，雖然還在緩存期限中，但就不會正常響應。</li>
+<li><code>only-if-cached</code>：請求頭。客戶端只接受代理緩存，不接受源伺服器的響應。</li>
+<li>同源：<code>scheme</code>, <code>host</code>, <code>port</code>都相同。</li>
+<li>非同源站點的限制：
+<ul>
+<li>不能讀取和修改對方的<code>DOM</code>。</li>
+<li>不能讀取對方的<code>Cookie</code>, <code>IndexDB</code>, <code>LocalStorage</code>。</li>
+<li>限制<code>XMLHttpRequest</code>請求。</li>
+</ul>
+</li>
+<li><code>CORS</code>，跨域資源共享。</li>
+<li><a href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/CORS#%E7%B0%A1%E5%96%AE%E8%AB%8B%E6%B1%82" target="_blank" rel="noopener">簡單請求</a>只能符合以下條件：
+<ul>
+<li>請求方法為：<code>GET</code>, <code>POST</code>, <code>HEAD</code>。</li>
+<li>請求頭的取值範圍：<code>Accept</code>, <code>Accept-Language</code>, <code>Content-Language</code>, <code>Content-Type</code>, <code>Last-Event-ID</code>, <code>DPR</code>, <code>Save-Data</code>, <code>Viewport-Width</code>, <code>Width</code>。</li>
+<li><code>Content-Type</code>標頭值：<code>application/x-www-form-urlencoded</code>, <code>multipart/form-data</code>, <code>text/plain</code>。</li>
+<li>沒有事件監聽器被註冊到任何用來發出請求的<code>XMLHttpRequestUpload</code>物件（經由<code>XMLHttpRequest.upload</code>屬性取得）上。</li>
+<li>請求中沒有<code>ReadableStream</code>物件被用於上傳。</li>
+</ul>
+</li>
+<li>瀏覽器在發送<code>簡單請求</code>前，會自動添加一個<code>origin</code>字段，用來說明來自哪裡。伺服器在拿到請求後，在響應會對應添加一個<code>Access-Control-Allow-Origin</code>字段，如果<code>origin</code>不在這個範圍內，則瀏覽器會將響應攔截（伺服器已成功響應了）。</li>
+<li><code>Access-Control-Allow-Credentials</code>：在<code>簡單請求</code>驗證成功過<code>origin</code>後，能用來標示是否允許發送<code>Cookie</code>。</li>
+<li><code>Access-Control-Expose-Headers</code>：在<code>簡單請求</code>驗證成功過<code>origin</code>後，除了<code>簡單請求</code>規定下的請求頭字段可以拿到外，還能拿到這個字段聲明的響應頭字段。</li>
+<li>對<code>非簡單請求</code>，會先發送<code>預檢請求</code>，之後才是<code>跨域請求</code>。</li>
+<li><code>預檢請求</code>的方法是<code>OPTIONS</code>，同時會加上<code>Origin</code>源地址, <code>Host</code>目標地址, <code>Access-Control-Request-Method</code>列出跨域請求用到哪個<code>HTTP</code>方法, <code>Access-Control-Request-Headers</code>列出跨域請求將要加上什麼請求頭。</li>
+<li><code>預檢請求</code>的響應格式大致如下： <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">HTTP&#x2F;1.1 200 OK</span><br><span class="line">Access-Control-Allow-Origin: *</span><br><span class="line">Access-Control-Allow-Methods: GET, POST, PUT</span><br><span class="line">Access-Control-Allow-Headers: X-Custom-Header</span><br><span class="line">Access-Control-Allow-Credentials: true</span><br><span class="line">Access-Control-Max-Age: 1728000</span><br><span class="line">Content-Type: text&#x2F;html; charset&#x3D;utf-8</span><br><span class="line">Content-Encoding: gzip</span><br><span class="line">Content-Length: 0</span><br></pre></td></tr></table></figure>
+</li>
+<li><code>預檢請求</code>的響應頭中的關鍵字段：
+<ul>
+<li><code>Access-Control-Allow-Origin</code>: 表示可以允許請求的源，可以填具體的域名，或是用<code>*</code>表示允許任意請求源。</li>
+<li><code>Access-Control-Allow-Methods</code>: 表示允許的請求方法列表。</li>
+<li><code>Access-Control-Allow-Credentials</code>: 同簡單請求的相同字段。</li>
+<li><code>Access-Control-Allow-Headers</code>: 表示允許發送的請求頭字段。</li>
+<li><code>Access-Control-Max-Age</code>: 預檢請求的有效期。在此期間，不用發出另外一條預檢請求。</li>
+</ul>
+</li>
+<li>在<code>預檢請求</code>的響應返回後，如果請求不滿足<code>響應頭</code>的條件，會觸發<code>XMLHttpRequest</code>的<code>onerror</code>方法。瀏覽器不再發送後面的的<code>跨域請求</code>。</li>
+<li>到了發送<code>跨域請求</code>的階段時，跟<code>簡單請求</code>的狀況就是一樣的了。</li>
+<li><code>JSONP</code>原理：<code>script</code>標籤的<code>src</code>字段不遵循同源政策，可以根據<code>src</code>上的目標地址發送<code>GET</code>請求，並拿到響應。</li>
+<li><code>JSONP</code>的兼容性好，可以支援更早期的瀏覽器。但支持的請求方法過於單一。</li>
+<li>通過<code>nginx</code>的反向代理來支持跨域請求。</li>
+<li><code>HTTPS</code> = <code>HTTP</code> + <code>SSL/TLS</code></li>
+<li><code>SSL</code>，即安全套接層（<code>Secure Sockets Layer</code>）。處於<code>OSI</code>模型的會話層。發展到第三個大版本被標準化，成為<code>TLS</code>(傳輸層安全,<code>Transport Layer Security</code>)。主流版本為<code>TLS/1.2</code>，2018推出了<code>TLS/1.3</code>。</li>
+<li><code>TLS/1.2</code>握手過程：
+<ul>
+<li><code>Client Hello</code>: 客戶端會先發送<code>client_random</code>, <code>TSL版本</code>, <code>加密套件列表</code>。</li>
+<li><code>Server Hello</code>: 伺服器發送<code>server_random</code>, <code>server_params</code>, <code>確認TLS版本、使用的加密套件列表、伺服器使用的證書</code>。</li>
+<li><code>Client驗證證書</code>: 客戶端驗證伺服器傳來的<code>證書</code>和<code>簽名</code>是否通過，通過則傳<code>client_params</code>給伺服器</li>
+<li><code>Client生成secret</code>: 客戶端通過<code>client_params</code>, <code>server_params</code>, <code>client_random</code>, <code>server_random</code>和<code>加密套件列表</code>生成最終的<code>secret</code>。</li>
+<li><code>Server生成secret</code>: 伺服器通過相同的方式生成最終<code>secret</code>。</li>
+<li>之後傳輸兩邊都用各自的最終<code>secret</code>作為密鑰進行加解密。</li>
+</ul>
+</li>
+<li><code>TLS/1.2</code>握手過程中需要注意的點：
+<ul>
+<li>加密套件列表的一般格式:  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">TLS_ECDHE_WITH_AES_128_GCM_SHA256</span><br></pre></td></tr></table></figure>
+</li>
+<li>加密套件列表含義：<code>TLS</code>握手過程中，使用<code>ECDHE</code>算法生成<code>pre_random</code>。採用<code>128</code>位的<code>AES</code>算法進行對稱加密，在對稱加密過程中使用主流的<code>GCM</code>分組模式。哈希摘要算法則是採用<code>SHA256</code>算法。</li>
+<li>哈希摘要算法在過程中主要是用來驗證身分用的。涉及到數字簽名的部分。</li>
+<li>以上面列出的<code>加密套件列表</code>為例，<code>Client</code>生成<code>secret</code>這個階段，最先是通過<code>ECDHE</code>算法算出<code>pre_random</code>，在這個過程中要傳入兩個參數: <code>server_params</code>和<code>client_params</code>。再用<code>pre_random</code>, <code>server_random</code>, <code>client_random</code>三者通過一個偽隨即數來計算出最終的<code>secret</code>。</li>
+<li><code>TLS</code>握手是一個<code>雙向認證</code>的過程。</li>
+<li>客戶端生成<code>secret</code>後，會給伺服器發送一個<code>收尾</code>的消息，告訴伺服器之後的都用對稱加密，對稱加密的算法就用第一次約定的。伺服器生成完<code>secret</code>也會向客戶端發送一個<code>收尾</code>消息，告訴客戶端之後直接使用對稱加密來通信。這個<code>收尾</code>的消息包括兩部分：<code>Changer Cipher Spec</code>，意味著後面都是加密傳輸。<code>Finished</code>，這個消息是對之前所有發送的數據做的<code>摘要</code>，對<code>摘要進行對稱加密</code>，讓對方驗證一下。當雙方都驗證通過之後，握手過程才算是正式結束。後面的<code>HTTP</code>就正式開始傳輸加密報文。</li>
+<li>使用<code>ECDHE</code>還有一個特點，客戶端發送完<code>收尾</code>消息後，可以提前<code>搶跑</code>，不必等<code>收尾</code>消息，直接發送加密的<code>HTTP</code>報文，節省了一個<code>RTT</code>(<code>round-trip time</code>, 客戶端到伺服器往返所花時間)。這個也叫<code>TLS False Start</code></li>
+</ul>
+</li>
+<li>2018年推出的<code>TLS/1.3</code>，對<code>TLS/1.2</code>做出了一系列的改進，主要分為：<code>強化安全</code>, <code>提高性能</code>。</li>
+<li>在<code>TLS/1.3</code>中廢除了非常多的加密算法，最終只保留了五個加密套件：
+<ul>
+<li>TLS_AES_128_GCM_SHA256</li>
+<li>TLS_AES_256_GCM_SHA384</li>
+<li>TLS_CHACHA20_POLY1305_SHA256</li>
+<li>TLS_AES_128_GCM_SHA256</li>
+<li>TLS_AES_128_GCM_8_SHA256</li>
+</ul>
+</li>
+<li>在<code>TLS/1.3</code>中，改進了握手流程，伺服器不必等客戶端驗證證書之後才能拿到<code>client_params</code>，而是在一開始就能拿到。相比<code>TLS/1.2</code>少了一個RTT，但相對的在第一次握手時客戶端要傳輸更多的信息。由於握手過程對客戶端來說只剩下了一去一回，這種握手方式也叫<code>1-RTT握手</code>。</li>
+<li><code>1-RTT</code>的優化方式之一，會話複用。雙方連接成功後，伺服器加密會話信息，用<code>session ticket</code>消息發送給客戶端，讓客戶端存下來。在下一次重連時，直接把這個<code>session ticket</code>進行解密，驗證它有沒有過期，如果沒過期則直接恢復之前的會話狀態。這個方式在保證<code>1-RTT</code>的同時，節省了重新生成會話密鑰這些算法所消耗的時間，也是一筆可觀的性能提升。</li>
+<li><code>1-RTT</code>的優化方式之二，<code>PSK</code>。在發送<code>session ticket</code>的同時帶上應用數據，不用等到伺服器確認，這種方式稱為<code>Pre-Shared Key</code>。通過這樣的方式可以使重連優化到<code>0-RTT</code>。</li>
+<li>由於<code>HTTPS</code>對於安全方面的處理做的非常好，<code>HTTP</code>的改進關注點放在性能方面。對於<code>HTTP/2</code>，性能方面的提升在兩點：
+<ul>
+<li>頭部壓縮</li>
+<li>多路復用</li>
+</ul>
+</li>
+<li><code>HPACK</code>, <code>HTTP/2</code>的頭部壓縮算法。<br>
+在<code>HTTP/2</code>之前，<code>請求體</code>一般會有響應的壓縮編碼過程，但頭部字段本身卻沒有。當請求字段非常複雜，尤其對於<code>GET</code>請求，請求報文幾乎都是請求頭。<code>HTTP/2</code>針對頭部字段，採用了對應的壓縮算法<code>HPack</code>。</li>
+<li><code>HPACK</code>的主要兩點：
+<ul>
+<li>首先會在伺服器和客戶端之間建立哈希表，將用到的字段放在這張表中。在傳輸的時候，對於之前出現過的值，只需要把索引傳給對方即可。</li>
+<li>對整數和字串進行<code>哈夫曼編碼</code>。<code>哈夫曼編碼</code>的原理就是將所有出現過的字符建立一張索引表，對出現次數多的字符其對應的索引盡可能短，傳輸的時候也是傳輸這樣的索引序列，可以達到非常高的壓縮率。</li>
+</ul>
+</li>
+<li><code>二進制分幀</code>，<code>HTTP/2</code>的多路複用。解決隊頭阻塞問題。<br>
+原來<code>Headers + Body</code>的報文格式被拆分成了一個個二進制的幀。用<code>Headers幀</code>存放頭部字段，<code>Data幀</code>存放請求體數據。拆分後，伺服器看到的不再是一個個完整的<code>HTTP</code>請求報文，而是一堆亂序的<code>二進制幀</code>。這些<code>二進制幀</code>不存在先後關係，因為也就沒有了<code>HTTP</code>的隊頭阻塞的問題。<br>
+通信雙方都可以給對方發送<code>二進制幀</code>，這種<code>二進制幀</code>的<code>雙向傳輸的序列</code>，也叫做<code>流</code>。<code>HTTP/2</code>用<code>流</code>在一個<code>TCP</code>連接上，進行多個<code>數據幀</code>的通信，也就是<code>多路複用</code>的概念。</li>
+<li>上面提到的<code>亂序</code>的<code>二進制幀</code>。這邊的<code>亂序</code>指的是不同<code>ID</code>的<code>流</code>是亂序的，但同一個<code>ID</code>的<code>流</code>是按順序傳輸的。</li>
+<li>在<code>HTTP/2</code>中，伺服器不再是完全被動的接收請求，響應請求。它也能新建<code>流</code>來給客戶端發送消息，也就是<code>伺服器推送</code>(<code>server push</code>)。當一個<code>TCP</code>連接建立後，瀏覽器請求一個<code>HTML</code>文件，伺服器可以在返回<code>HTML</code>文件的基礎上，同時將<code>HTML</code>中引用到的其他資源文件一個返回給瀏覽器，減少瀏覽器的等待。</li>
+<li><code>HTTP</code>結構參考：<br>
+<img src="https://i.imgur.com/PTFOAin.png" alt=""></li>
+<li>二進制幀的幀結果大致如下：<br>
+<img src="https://i.imgur.com/vUsIxDN.png" alt=""></li>
+<li>每個幀分為<code>幀頭</code>(<code>Frame Header</code>)和<code>幀體</code>(<code>Frame Payload</code>)。</li>
+<li><code>幀長度</code>，表示<code>幀體</code>的長度。3個字節。</li>
+<li><code>幀類型</code>，分為<code>數據幀</code>和<code>控制幀</code>兩種。<code>數據幀</code>用來存放<code>HTTP</code>報文，<code>控制幀</code>用來管理<code>流</code>的傳輸。1個字節。</li>
+<li><code>幀標誌</code>，一共有8個標誌位，常用的有<code>END_HEADERS</code>表示頭數據結束，<code>END_STREAM</code>表示單方向數據發送結束。1個字節。</li>
+<li><code>流標示符</code>，也就是<code>Stream ID</code>。接收方在亂序的<code>二進制幀</code>中選出<code>ID</code>相同的幀，按順序組裝成請求/響應報文。4個字節。</li>
+<li><code>流</code>通過標誌位的改變來實現具體的狀態改變。通常的過程是
+<ul>
+<li>剛開始兩者都是空閒。</li>
+<li>客戶端發送<code>HEADERS幀</code>，開始分配<code>Stream ID</code>，客戶端的<code>流</code>打開。</li>
+<li>伺服器接收之後，伺服器的<code>流</code>也打開。</li>
+<li>兩端的<code>流</code>打開後，可以互相傳遞<code>數據幀</code>和<code>控制幀</code>。</li>
+<li>當客戶端要關閉時，向伺服器發送<code>END_STREAM</code>幀，進入<code>半關閉狀態</code>。這時候客戶端只能接收數據，不能發送。</li>
+<li>伺服器接收到這個<code>END_STREAM</code>，也進入<code>半關閉狀態</code>。此時，伺服器只能發送數據，不能接收數據。</li>
+<li>伺服器向客戶端發送<code>END_STREAM</code>幀，表示數據發送完畢，雙方進入<code>關閉狀態</code>。</li>
+<li>如果下次要開啟新的<code>流</code>，<code>Stream ID</code>需要自增，直到上限為止。到達上限後，開一個新的<code>TCP</code>連接重頭開始計數。<code>流標示符</code>長度為4個字節，最高位保留，範圍是0~2的31次方，大約21億個。</li>
+</ul>
+</li>
+<li><code>流</code>的特性：
+<ul>
+<li>並發性。一個<code>HTTP/2</code>連接上可以同時發送多個幀。</li>
+<li>自增性。<code>Stream ID</code>不可重用，會按順序向上自增。</li>
+<li>雙向性。客戶端和伺服器端都可以創建流，互不干擾。</li>
+<li>可設置優先級。可以設置數據幀的優先級，讓伺服器先處理重要資源，優化用戶體驗。</li>
+</ul>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>HTTP</category>
+      </categories>
+      <tags>
+        <tag>HTTP</tag>
+        <tag>文章隨筆</tag>
+      </tags>
+  </entry>
+</search>
