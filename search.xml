@@ -132,6 +132,54 @@
       </tags>
   </entry>
   <entry>
+    <title>What Server Side JavaScript needs</title>
+    <url>/2020/05/31/What_Server_Side_JavaScript_needs/</url>
+    <content><![CDATA[<blockquote>
+<p>原文: <a href="https://www.blueskyonmars.com/2009/01/29/what-server-side-javascript-needs/" target="_blank" rel="noopener">What Server Side JavaScript needs</a> @written by Kevin Dangoor<br>
+譯者: naremloa</p>
+</blockquote>
+<p><a href="https://en.wikipedia.org/wiki/JavaScript#Server-side_JavaScript" target="_blank" rel="noopener">伺服器端 <em>JavaScrip</em> 技術已存在許久</a>。早在 1996 年， <em>Netscape</em> 就在他們的伺服器軟體裡提供伺服器端的 <em>JavaScript</em> 。 <em>Helma</em> 也已存在有些時日。但在過去的這幾年裡，伺服器端的開發發生了很大的改變。</p>
+<p><a href="https://en.wikipedia.org/wiki/JavaScript#Server-side_JavaScript" target="_blank" rel="noopener">Server side JavaScript</a> technology has been around for a long time. Netscape offered server side JavaScript in their server software back in 1996, and Helma has existed for a number of years as well. But, server side development has changed a lot over the past few years.</p>
+<p><em>Aptana</em> 的 <a href="http://www.aptana.com/jaxer" target="_blank" rel="noopener"><em>Jaxer</em></a> 在如何利用 <em>JavaScript</em> 環境同時運行在客戶端和伺服器端上，提供了全新的視角。非常便利的通信和與客戶端之間有著易於共享的程式碼這兩點，對運行在伺服器上的 <em>JavaScript</em> 帶來了極大的益處。</p>
+<p>Aptana’s <a href="http://www.aptana.com/jaxer" target="_blank" rel="noopener">Jaxer</a> gives an innovative view of how you can leverage a JavaScript environment running on both sides of the wire (client and server). Very convenient communication and the ability to easily share code between client and server are big benefits of running JavaScript on the server.</p>
+<p>肯定的說，<em>Jaxer</em> 和 <em>Helma</em> 都是很有趣dui yu的專案(當然，還有許多其他的專案)。但從我的角度來看，在伺服器上的 <em>JavaScript</em> 缺少的並非有趣的專案，而是有用的生態系統(<em>ecosystem</em>)。對於 <em>Python</em> ，人們喜歡討論 <em>web</em> 框架的碎片化之類的，相比之下， <em>JavaScript</em> 則不存在類似的討論。</p>
+<p>Jaxer and Helma are interesting projects, to be sure (and there are many others!). But what I see missing from JavaScript on the server is not interesting projects, but rather a useful ecosystem. People working in Python like to talk about the fragmentation of web frameworks and whatnot, but that’s nothing compared to the fragmentation of JavaScript.</p>
+<p>舉個例子， <em>JavaScript</em> 需要一個 <strong>跨直譯器標準庫(<em>cross-interpreter standard library</em>)</strong>。慶幸的是，由於已有的一部分標準庫（繼承自瀏覽器的那部分）的存在，你可以使用正規表達式和 <em>Dates</em> 。但是，檔案和目錄的部分呢？為什麼沒有一種 <em>API</em> 可以同時運作於 <em>Rhino</em> , <em>Spidermonkey</em> , <em>V8</em> 和 <em>JSCore</em> ？</p>
+<p>For example, JavaScript needs a <strong>cross-interpreter standard library</strong>. Thankfully, some amount of standard library exists (the part inherited from the browsers). So, you get regular expressions and dates. But, what about files and directories? Why can’t the same API be made to work in Rhino, Spidermonkey, V8 and JSCore?</p>
+<p>數量過少的<strong>標準接口</strong>。以“連接到資料庫上執行查詢”這種容易理解並常見的問題來說：在 <em>Rhino</em> 中，你需要使用 <em>JDBC</em> 。但 <em>JavaScript</em> 真的需要一種屬於自己的跨直譯器標準，就像 <em>Python</em> 的 <em>DBAPI</em> 。 <em>It should also be possible to take a webapp that was originally deployed behind an Apache module running Spidermonkey and then put it behind Jetty thanks to a standard web server/web app interface.</em></p>
+<p>A handful of <strong>standard interfaces</strong>. Connecting to a database and running queries is a well understood and common problem. In Rhino, you get to use JDBC. But, JavaScript really should have its own cross-interpreter standard like Python’s <a href="https://www.python.org/dev/peps/pep-0249/" target="_blank" rel="noopener">DBAPI</a>. It should also be possible to take a webapp that was originally deployed behind an Apache module running Spidermonkey and then put it behind Jetty thanks to a standard web server/web app interface.</p>
+<p><em>JavaScript</em> 需要一種標準的方式來引入其他模組，並且這些模組要存在在一個審慎(<em>discreet</em>)的命名空間下。現存的已有多種簡單的方式來處理命名空間的問題，但還沒有一種標準的、程式化的方式來實現模組的加載。這是一件非常重要的事情，因為伺服器端的 <em>app</em> 會需要引入大量的程式，在這之間，很可能有可以滿足標準接口的程式間混搭的部分。</p>
+<p>JavaScript needs a <strong>standard way to include other modules</strong> and for those modules to live in discreet namespaces. There are easy ways to do namespaces, but there’s no standard programmatic way to load a module (once!). This is really important, because server side apps can include a lot of code and will likely mix and match parts that meet those standard interfaces.</p>
+<p>在發布和部署，甚至安裝包上，需要有某種方式來打包程式。在 <em>Linux</em> 人們會指出，他們只需要輸入 <code>apt get</code> （或是 <code>yum</code> 等），就能完成工作。但在 <em>Macs</em> 和 <em>Windows</em> 上，仍有大量的使用者需要一種便利的方式來建置開發環境和打包他們所寫的程式給其他的開發者或用戶使用。</p>
+<p>There needs to be a way to <strong>package up code for deployment and distribution</strong> and further to <strong>install packages</strong>. Linux people will correctly point out that they can just type “apt get” (or yum, or whatever) and their work is done. But there are a lot of people using Macs and Windows who need a convenient way to get their development environments set up and to package up the code they write for deployment and for other people to use.</p>
+<p>還有一部分的發布和安裝問題是有關包倉庫的。我不知道 <em><a href="http://www.openjsan.org/" target="_blank" rel="noopener">JSAN</a></em> 是不是這個問題的答案，但我知道當人們很有可能在他們的 <em>app</em> 中同時放入許多的庫時，一個可以簡單的安裝包和它的相關依賴的方式是能有巨大影響力的。</p>
+<p>Part of the distribution and installation problem is a <strong>package repository</strong>. I don’t know if <a href="http://www.openjsan.org/" target="_blank" rel="noopener">JSAN</a> is the answer there, but I do know that an easy way to install a package <strong>and its dependencies</strong> makes a huge difference in how many libraries people will likely pull together in their apps.</p>
+<p>並且，在這些問題之上，我們還有模板引擎，物件關係對映，中間件，包應用等。事實上，這些東西早已存在。但他們沒有一種共同的基礎來去做規範。而正是這些，阻止了生態系統的發展。</p>
+<p>And, on top of all of this goodness, we’d get template engines, object relational mappers, middleware, packaged apps, etc. In fact, many of those things already exist. But, the problem is that they have no common basis to sit on. And that’s what prevents an ecosystem from growing.</p>
+<p>如果你在 <em>Python</em> 的包索引搜索 <em>WSGI</em> （是 <em>Python</em> 連接 <em>web</em> 應用和 <em>web</em> 伺服器的標準），你會找到180個包，包括有伺服器、中間件、成熟的應用等。這些包都會列出 <em>WSGI</em> 。而這才是一個生態系統該有的樣子。 <em>Java</em> 有一個， <em>Ruby</em> 有一個， 所以 <em>JavaScript</em> 也需要有一個。</p>
+<p>If you search the Python Package Index for WSGI (the Python standard for connecting webapps with web servers), you’ll find 180 packages today… servers, middleware, full blown applications. And those are just the packages that have “WSGI” in their listings. That’s what an ecosystem looks like. And Java has one, and Ruby has one, and JavaScript needs one.</p>
+<p>值得注意的是，這些 <em>WSGI</em> 組件可以在不做改變下同時運行在 <em>CPython</em>, <em>Jython</em> 和 <em>IronPython</em> ，而這全都要歸功於它們共同的標準庫。 <em>JavaScript</em> 可以有一批 <em>C</em> 的實現，就像是 <em>Java</em> 和 <em>.Net</em> 的實現那樣，它們只需要在一些接口之類的部分有個小小的協定。如果庫的內容在協定內的環境下都能運行，就可以吸引更多的使用者，然後希望，更多的提交者來幫助庫的壯大。</p>
+<p>It’s also worth noting that many of those WSGI components can run unchanged on CPython, Jython and IronPython, thanks to a common standard library. JavaScript has a collection of implementations in C, as well as Java and .Net implementations and there just needs to be a little agreement on some interfaces and such. Libraries that run in all of those places can attract more users and, hopefully, more committers to help the libraries grow.</p>
+<p>我在這裡所講的不是一個技術問題。而是如何讓人們聚在一起，在討論中前進，並開始構建一個龐大的，有趣的東西。</p>
+<p>What I’m describing here is not a technical problem. It’s a matter of people getting together and making a decision to step forward and start building up something bigger and cooler together.</p>
+<p>為此，我建立了一個新的<a href="https://groups.google.com/forum/#!forum/commonjs" target="_blank" rel="noopener"> <em>ServerJS</em> 群組</a>，希望能幫助有興趣的成員進行討論，甚至讓彼此可以面對面的編寫一些程式和建置一些接口。對目前已有的數量龐大的 <em>JavaScript</em> 程式，讓我們來看看能否讓它們變的更有價值。</p>
+<p>To that end, I’ve set up a new <a href="https://groups.google.com/forum/#!forum/commonjs" target="_blank" rel="noopener">ServerJS group</a> in hopes of getting the interested parties talking and maybe even to get us together face-to-face to produce some code and settle on some interfaces. There’s a tremendous collection of JavaScript code out there already, and let’s see if we can make all of that code that much more valuable.</p>
+<p>在 <em>Mozilla</em> 的 <em>web</em> 開發工具群組，我們有個豐富的規範(<em>a wide open charter</em>)來幫助軟體開發者充分使用開放 <em>web</em> 。在幫助伺服器端 <em>JavaScript</em> 社區成長和繁榮上這點上，我們會盡到自己的本份。</p>
+<p>In the web developer tools group at Mozilla, we have a wide open charter to help software developers make the best use of the open web. Doing our bit to help the server side JavaScript community grow and flourish can certainly be a part of that.</p>
+<p>（在有人想說：“為什麼不用 <em>Ruby</em> / <em>Python</em> / <em>Java</em> / <em>C#</em> ？” 之前，我只想表示，這完全是個不同的問題，並且我也不想在這篇文章討論該問題。）</p>
+<p>(Before someone says “why not just use Ruby/Python/Java/C#?” let me just say that that is an entirely different question and I won’t address that in this post.)</p>
+<p>更新：該群組現在更名為<a href="http://groups.google.com/group/commonjs" target="_blank" rel="noopener">CommonJS</a></p>
+<p>Update: The group is now called <a href="http://groups.google.com/group/commonjs" target="_blank" rel="noopener">CommonJS</a>.</p>
+]]></content>
+      <categories>
+        <category>commonJS</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>commonJS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>文章隨筆(1</title>
     <url>/2020/05/20/jotting_1/</url>
     <content><![CDATA[<blockquote>
