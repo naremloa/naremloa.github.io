@@ -1,6 +1,6 @@
 ---
 title: Deno 1.0
-id: deno_1_0
+id: translation-deno-1-0
 date: 2020-05-18 17:47:28
 categories: Deno
 description: 【譯文】Deno 1.0正式發布
