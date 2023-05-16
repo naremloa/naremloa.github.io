@@ -31,20 +31,18 @@ custom_file_path:
   #mixin: source/_data/mixins.styl
   #style: source/_data/styles.styl
 
-
 # ---------------------------------------------------------------
 # Scheme Settings
 # ---------------------------------------------------------------
 
 # Schemes
-scheme: Muse
-#scheme: Mist
-#scheme: Pisces
-#scheme: Gemini
+# scheme: Muse
+# scheme: Mist
+scheme: Pisces
+# scheme: Gemini
 
 # Dark Mode
-darkmode: false
-
+darkmode: true
 
 # ---------------------------------------------------------------
 # Site Information Settings
@@ -64,14 +62,14 @@ custom_logo: #/uploads/custom-logo.png
 # See: https://creativecommons.org/about/cclicenses/
 creative_commons:
   # Available values: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | cc-zero
-  license: by-nc-sa
+  license: by-nc-nd
   # Available values: big | small
   size: small
-  sidebar: false
-  post: false
+  sidebar: true
+  post: true
   # You can set a language value if you prefer a translated version of CC license, e.g. deed.zh
   # CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org
-  language:
+  language: "deed.zh_TW"
 
 # Open graph settings
 # See: https://hexo.io/docs/helpers#open-graph
@@ -86,7 +84,6 @@ open_graph:
     #fb_admins: <fb:admin_id>
     #fb_app_id: <fb:app_id>
 
-
 # ---------------------------------------------------------------
 # Menu Settings
 # ---------------------------------------------------------------
@@ -96,7 +93,8 @@ open_graph:
 # Value before `||` delimiter is the target link, value after `||` delimiter is the name of Font Awesome icon.
 # External url should start with http:// or https://
 menu:
-  #home: / || fa fa-home
+  home: / || fa fa-home
+  archives: /archives/ || fa fa-archive
   #about: /about/ || fa fa-user
   #tags: /tags/ || fa fa-tags
   #categories: /categories/ || fa fa-th
@@ -109,7 +107,6 @@ menu:
 menu_settings:
   icons: true
   badges: false
-
 
 # ---------------------------------------------------------------
 # Sidebar Settings
@@ -131,7 +128,7 @@ sidebar:
   #  - always  expand for all pages automatically.
   #  - hide    expand only when click on the sidebar toggle icon.
   #  - remove  totally remove sidebar including sidebar toggle.
-  display: post
+  display: always
 
   # Sidebar padding in pixels.
   padding: 18
@@ -155,6 +152,9 @@ site_state: true
 # Key is the link label showing to end users.
 # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
 social:
+  GitHub: https://github.com/naremloa || fab fa-github
+  E-Mail: mailto:naremloa@gmail.com || fa fa-envelope
+  Steam: https://steamcommunity.com/id/naremloa || fab fa-steam
   #GitHub: https://github.com/yourname || fab fa-github
   #E-Mail: mailto:yourname@gmail.com || fa fa-envelope
   #Weibo: https://weibo.com/yourname || fab fa-weibo
@@ -167,7 +167,7 @@ social:
 
 social_icons:
   enable: true
-  icons_only: false
+  icons_only: true
   transition: false
 
 # Blog rolls
@@ -192,7 +192,6 @@ toc:
   # Maximum heading depth of generated toc.
   max_depth: 6
 
-
 # ---------------------------------------------------------------
 # Footer Settings
 # See: https://theme-next.js.org/docs/theme-settings/footer
@@ -203,22 +202,22 @@ language_switcher: false
 
 footer:
   # Specify the year when the site was setup. If not defined, current year will be used.
-  #since: 2021
+  since: 2020
 
   # Icon between year and copyright info.
   icon:
     # Icon name in Font Awesome. See: https://fontawesome.com/icons
-    name: fa fa-heart
+    name: fas fa-terminal
     # If you want to animate the icon, set it to true.
     animated: false
     # Change the color of icon, using Hex Code.
-    color: "#ff0000"
+    color: "#999999"
 
   # If not defined, `author` from Hexo `_config.yml` will be used.
   copyright:
 
   # Powered by Hexo & NexT
-  powered: true
+  powered: false
 
   # Beian ICP and gongan information for Chinese users. See: https://beian.miit.gov.cn, http://www.beian.gov.cn
   beian:
@@ -230,7 +229,6 @@ footer:
     gongan_num:
     # The icon for gongan beian. See: http://www.beian.gov.cn/portal/download
     gongan_icon_url:
-
 
 # ---------------------------------------------------------------
 # Post Settings
@@ -260,7 +258,7 @@ symbols_count_time:
   item_text_total: false
 
 # Use icon instead of the symbol # to indicate the tag at the bottom of the post
-tag_icon: false
+tag_icon: true
 
 # Donate (Sponsor) settings
 # Front-matter variable (nonsupport animation).
@@ -298,8 +296,7 @@ post_edit:
 
 # Show previous post and next post in post footer if exists
 # Available values: left | right | false
-post_navigation: left
-
+post_navigation: false
 
 # ---------------------------------------------------------------
 # Custom Page Settings
@@ -326,7 +323,6 @@ calendar:
   showDeleted: false
   singleEvents: true
   maxResults: 250
-
 
 # ---------------------------------------------------------------
 # Misc Theme Settings
@@ -376,9 +372,9 @@ codeblock:
 back2top:
   enable: true
   # Back to top in sidebar.
-  sidebar: false
+  sidebar: true
   # Scroll percent label in b2t button.
-  scrollpercent: false
+  scrollpercent: true
 
 # Reading progress bar
 reading_progress:
@@ -404,7 +400,6 @@ bookmark:
 github_banner:
   enable: false
   permalink: https://github.com/yourname
-
 
 # ---------------------------------------------------------------
 # Font Settings
@@ -457,7 +452,6 @@ font:
     external: true
     family:
 
-
 # ---------------------------------------------------------------
 # SEO Settings
 # See: https://theme-next.js.org/docs/theme-settings/seo
@@ -487,7 +481,6 @@ yandex_site_verification:
 # Baidu Webmaster tools verification.
 # See: https://ziyuan.baidu.com/site
 baidu_site_verification:
-
 
 # ---------------------------------------------------------------
 # Tags Settings
@@ -532,7 +525,6 @@ mermaid:
     light: default
     dark: dark
 
-
 # ---------------------------------------------------------------
 # Third Party Plugins & Services Settings
 # See: https://theme-next.js.org/docs/third-party-services/
@@ -561,7 +553,6 @@ math:
     enable: false
     # See: https://github.com/KaTeX/KaTeX/tree/master/contrib/copy-tex
     copy_tex: false
-
 
 # ---------------------------------------------------------------
 # External Libraries
@@ -608,7 +599,6 @@ quicklink:
   # Default (true) will attempt to use the fetch() API if supported (rather than link[rel=prefetch]).
   priority: true
 
-
 # ---------------------------------------------------------------
 # Animation Settings
 # ---------------------------------------------------------------
@@ -647,7 +637,6 @@ canvas_ribbon:
   size: 300 # The width of the ribbon
   alpha: 0.6 # The transparency of the ribbon
   zIndex: -1 # The display level of the ribbon
-
 
 # ---------------------------------------------------------------
 # Comments Settings
@@ -736,7 +725,6 @@ utterances:
 # For more information: https://isso-comments.de
 isso: # <data_isso>
 
-
 # ---------------------------------------------------------------
 # Post Widgets & Content Sharing Services
 # See: https://theme-next.js.org/docs/third-party-services/post-widgets
@@ -748,7 +736,6 @@ addtoany:
   buttons:
     - facebook
     - twitter
-
 
 # ---------------------------------------------------------------
 # Statistics and Analytics
@@ -834,7 +821,6 @@ busuanzi_count:
   post_views: true
   post_views_icon: far fa-eye
 
-
 # ---------------------------------------------------------------
 # Search Services
 # See: https://theme-next.js.org/docs/third-party-services/search-services
@@ -860,7 +846,6 @@ local_search:
   unescape: false
   # Preload the search data when the page loads.
   preload: false
-
 
 # ---------------------------------------------------------------
 # Chat Services
@@ -894,7 +879,6 @@ tidio:
 gitter:
   enable: false
   room:
-
 
 # ---------------------------------------------------------------
 # CDN Settings
