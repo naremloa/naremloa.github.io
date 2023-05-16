@@ -15,18 +15,16 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Use Node.js 16.x
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: "16"
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
           path: node_modules
-          key: ${{ runner.OS }}-yarn-cache
-          restore-keys: |
-            ${{ runner.OS }}-yarn-cache
+          key: ${{ runner.OS }}-yarn-cache-${{hashFiles(yarn.lock)}}
       - name: Install Dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile --check-files
       - name: Build
         run: yarn build
       - name: Deploy
