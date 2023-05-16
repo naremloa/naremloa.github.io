@@ -3,7 +3,6 @@ title: Deno 1.0
 id: translation-deno-1-0
 date: 2020-05-18 17:47:28
 categories: Deno
-description: 【譯文】Deno 1.0正式發布
 tags:
   - Deno
   - JavaScript
@@ -15,6 +14,8 @@ tags:
 動態語言是一種很有用的工具。腳本能使用戶迅速且簡潔的將複雜的系統黏合在一起，並且能在不需要考慮包括像記憶體管理、系統建置等技術細節的環境下充分的展現創意。近幾年，像 Rust、Go 等的程式語言讓用戶能更容易的生產出複雜的原生機器語言，這些專案也在計算機基礎設施(`computer infrastructure`)的發展上有著很重大的作用。然而我們認為，能有一個可以解決多種範圍的問題領域(`problem domains`)的強大的腳本環境，還是很重要的。
 
 Dynamic languages are useful tools. Scripting allows users to rapidly and succinctly tie together complex systems and express ideas without worrying about details like memory management or build systems. In recent years programming languages like Rust and Go have made it much easier to produce sophisticated native machine code; these projects are incredibly important developments in computer infrastructure. However, we claim it is still important to have a powerful scripting environment that can address a wide range of problem domains.
+
+<!-- more -->
 
 JavaScript 是一種最為廣泛使用的動態語言，僅需要一個瀏覽器就能運行在所有設備上。極大數量擅長 JavaScript 的工程師，花了大部分的功夫在優化其執行上。通過像 ECMA 這樣的標準組織，該語言正在小心的且持續的發展中。我們相信，不管是在瀏覽器環境下還是獨立的進程中，JavaScript 都會是動態語言工具的首選。
 
