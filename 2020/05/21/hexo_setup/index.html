@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"naremloa.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="該網站的建立過程記錄。包括建立流程，配置設定，相關套件使用和參考文章。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo建置">
+<meta property="og:url" content="https://naremloa.github.io/2020/05/21/hexo_setup/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="該網站的建立過程記錄。包括建立流程，配置設定，相關套件使用和參考文章。">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-05-21T16:37:25.000Z">
+<meta property="article:modified_time" content="2023-05-16T08:17:34.708Z">
+<meta property="article:author" content="naremloa">
+<meta property="article:tag" content="Hexo">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://naremloa.github.io/2020/05/21/hexo_setup/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://naremloa.github.io/2020/05/21/hexo_setup/","path":"2020/05/21/hexo_setup/","title":"Hexo建置"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Hexo建置 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hexo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%88%E6%A1%88%E5%BB%BA%E7%AB%8B"><span class="nav-number">1.</span> <span class="nav-text">專案建立</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%A2%E8%A3%BD%E5%8C%96%E4%B8%BB%E9%A1%8C"><span class="nav-number">2.</span> <span class="nav-text">客製化主題</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A5%97%E4%BB%B6%E4%BB%8B%E7%B4%B9"><span class="nav-number">3.</span> <span class="nav-text">套件介紹</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hexo-generator-sitemap"><span class="nav-number">3.1.</span> <span class="nav-text">hexo-generator-sitemap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hexo-deployer-git"><span class="nav-number">3.2.</span> <span class="nav-text">hexo-deployer-git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hexo-generator-searchdb"><span class="nav-number">3.3.</span> <span class="nav-text">hexo-generator-searchdb</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E9%8F%88%E6%8E%A5"><span class="nav-number">4.</span> <span class="nav-text">參考鏈接</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">naremloa</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分類</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/naremloa" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;naremloa" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:naremloa@gmail.com" title="E-Mail → mailto:naremloa@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://steamcommunity.com/id/naremloa" title="Steam → https:&#x2F;&#x2F;steamcommunity.com&#x2F;id&#x2F;naremloa" rel="noopener me" target="_blank"><i class="fab fa-steam fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh_TW" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_nd.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="回到頂端">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://naremloa.github.io/2020/05/21/hexo_setup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="naremloa">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Hexo建置 | Hexo">
+      <meta itemprop="description" content="該網站的建立過程記錄。包括建立流程，配置設定，相關套件使用和參考文章。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo建置
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2020-05-21 16:37:25" itemprop="dateCreated datePublished" datetime="2020-05-21T16:37:25+00:00">2020-05-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2023-05-16 08:17:34" itemprop="dateModified" datetime="2023-05-16T08:17:34+00:00">2023-05-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">該網站的建立過程記錄。包括建立流程，配置設定，相關套件使用和參考文章。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/hexo-cli">hexo-cli@3.1.0</a> + <a target="_blank" rel="noopener" href="https://github.com/next-theme/hexo-theme-next/releases/tag/v8.0.0-rc.2">hexo-theme-next@v8.0.0-rc.2</a></p>
+</blockquote>
+<h2 id="專案建立"><a href="#專案建立" class="headerlink" title="專案建立"></a>專案建立</h2><p>參照<a target="_blank" rel="noopener" href="https://hexo.io/zh-tw/docs/setup">官網</a>的介紹在本地將專案建起，並完成<a target="_blank" rel="noopener" href="https://github.com/next-theme/hexo-theme-next">NexT</a>的安裝介紹。</p>
+<p>Hexo 的主題這塊會有個 <em>submodule</em> 問題，如果要同時兼顧客製化修改和持續性更新，有一篇<a target="_blank" rel="noopener" href="https://zhangnai.xin/2018/11/11/hexo-theme-upgrade/">「暴力而不失優雅的升級 Hexo 主題」</a>有討論相關內容，這邊暫不贅述。</p>
+<h2 id="客製化主題"><a href="#客製化主題" class="headerlink" title="客製化主題"></a>客製化主題</h2><p>客製化主要是從主題的<code>_config.yml</code>和其他模板檔案下手。方式有很多種(前面介紹的文章)，但在下手修改時，建議先考慮到主題後續更新的問題。</p>
+<p>如果沒有需要過多的客製化，推薦採用<code>data files</code>方式。相關<a target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next/issues/328">issue</a>。</p>
+<p>這邊純紀錄改動過的設定：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># next.yml</span></span><br><span class="line"><span class="comment"># 客製化檔案路徑</span></span><br><span class="line"><span class="attr">custom_file_path:</span></span><br><span class="line">  <span class="comment"># 客製化head標籤的內容</span></span><br><span class="line">  <span class="comment"># 這邊主要是解決google search console的驗證問題</span></span><br><span class="line">  <span class="attr">head:</span> <span class="string">source/_data/head.njk</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 各種icon</span></span><br><span class="line"><span class="attr">favicon:</span></span><br><span class="line">  <span class="attr">small:</span> <span class="string">&lt;favicon</span> <span class="string">16x16&gt;</span></span><br><span class="line">  <span class="attr">medium:</span> <span class="string">&lt;favicon</span> <span class="string">32x32&gt;</span></span><br><span class="line">  <span class="attr">apple_touch_icon:</span> <span class="string">&lt;apple_touch_icon&gt;</span></span><br><span class="line">  <span class="attr">safari_pinned_tab:</span> <span class="string">&lt;safari_pinned_tab&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 底部條顯示設定</span></span><br><span class="line"><span class="attr">footer:</span></span><br><span class="line">  <span class="comment"># 底部網站建立時間</span></span><br><span class="line">  <span class="attr">since:</span> <span class="string">&lt;setup</span> <span class="string">date&gt;</span></span><br><span class="line">  <span class="comment"># 底部icon</span></span><br><span class="line">  <span class="attr">icon:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">fas</span> <span class="string">fa-terminal</span></span><br><span class="line">    <span class="attr">animated:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">color:</span> <span class="string">&quot;#999999&quot;</span></span><br><span class="line">  <span class="comment"># 底部是否顯示 Powered by Hexo &amp; NexT</span></span><br><span class="line">  <span class="attr">powered:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 創用CC設定</span></span><br><span class="line"><span class="attr">creative_commons:</span></span><br><span class="line">  <span class="attr">license:</span> <span class="string">by-nc-nd</span></span><br><span class="line">  <span class="attr">sidebar:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">post:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">language:</span> <span class="string">&quot;zh-TW&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># NexT主題</span></span><br><span class="line"><span class="attr">scheme:</span> <span class="string">Pisces</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 暗黑模式</span></span><br><span class="line"><span class="attr">darkmode:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 側欄菜單設定</span></span><br><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-home</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-tags</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-archive</span></span><br><span class="line"><span class="attr">menu_settings:</span></span><br><span class="line">  <span class="attr">icons:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">badges:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 頭像設定</span></span><br><span class="line"><span class="attr">avatar:</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">&lt;your</span> <span class="string">avatar&gt;</span></span><br><span class="line">  <span class="attr">rounded:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">rotated:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 社交鏈接</span></span><br><span class="line"><span class="attr">social:</span></span><br><span class="line">  <span class="attr">GitHub:</span> <span class="string">&lt;link&gt;</span> <span class="string">||</span> <span class="string">fab</span> <span class="string">fa-github</span></span><br><span class="line">  <span class="attr">E-Mail:</span> <span class="string">mailto:&lt;mail&gt;</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-envelope</span></span><br><span class="line">  <span class="attr">Steam:</span> <span class="string">&lt;link&gt;</span> <span class="string">||</span> <span class="string">fab</span> <span class="string">fa-steam</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 控制標籤，用icon替代#</span></span><br><span class="line"><span class="attr">tag_icon:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 控制是否在底部顯示前一篇或後一篇文章</span></span><br><span class="line"><span class="attr">post_navigation:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回頂部按鈕設置</span></span><br><span class="line"><span class="attr">back2top:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">sidebar:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">scrollpercent:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 設置書籤</span></span><br><span class="line"><span class="attr">bookmark:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">color:</span> <span class="string">&quot;#222&quot;</span></span><br><span class="line">  <span class="attr">save:</span> <span class="string">auto</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># disqus設置</span></span><br><span class="line"><span class="attr">disqus:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">shortname:</span> <span class="string">&lt;your</span> <span class="string">shortname&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># searchdb設置</span></span><br><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line"><span class="comment"># site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">&lt;標題&gt;</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&lt;副標題&gt;</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">naremloa</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">&quot;zh-TW&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># URL</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">&lt;your</span> <span class="string">site</span> <span class="string">url&gt;</span></span><br><span class="line"><span class="comment"># 文章永久鏈接格式</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:day/:id/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 擴充套件</span></span><br><span class="line"><span class="attr">Plugins:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">hexo-generator-sitemap</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 主題名稱</span></span><br><span class="line"><span class="attr">theme:</span> <span class="string">next</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Hexo部署指令的相關設定</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span> <span class="string">&lt;my</span> <span class="string">repository</span> <span class="string">url&gt;</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="套件介紹"><a href="#套件介紹" class="headerlink" title="套件介紹"></a>套件介紹</h2><h3 id="hexo-generator-sitemap"><a href="#hexo-generator-sitemap" class="headerlink" title="hexo-generator-sitemap"></a>hexo-generator-sitemap</h3><p>會在<code>hexo generate</code>的過程中，順帶生成一份<code>sitemap.xml</code>。可以給 <em>google search console</em> 做搜索優化用。</p>
+<p>注意，在 <em>google search console</em> 中提交 <em>sitemap</em> 時，填寫的網址要帶上<code>.xml</code>，如<code>&lt;your url&gt;/sitemap.xml</code>，不然讀取不到。</p>
+<h3 id="hexo-deployer-git"><a href="#hexo-deployer-git" class="headerlink" title="hexo-deployer-git"></a>hexo-deployer-git</h3><p>配合<code>hexo deploy</code>使用，簡化部署流程。如果不走支持的部署方式，就不需要該套件了。</p>
+<h3 id="hexo-generator-searchdb"><a href="#hexo-generator-searchdb" class="headerlink" title="hexo-generator-searchdb"></a>hexo-generator-searchdb</h3><p>提供站內搜索。支持模糊匹配，兩個關鍵字中間要有個空格隔開。</p>
+<h2 id="參考鏈接"><a href="#參考鏈接" class="headerlink" title="參考鏈接"></a>參考鏈接</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">Hexo</a></li>
+<li><a target="_blank" rel="noopener" href="https://theme-next.js.org/">NexT</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhangnai.xin/2018/11/11/hexo-theme-upgrade/">暴力而不失優雅的升級 Hexo 主題</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next/issues/328">Theme configurations using Hexo data files</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.typeart.cc/hexoSeries/">Hexo 系列文章</a></li>
+<li><a target="_blank" rel="noopener" href="https://tding.top/docs/getting-started/data-files.html">數據文件</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>作者： </strong>naremloa
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://naremloa.github.io/2020/05/21/hexo_setup/" title="Hexo建置">https://naremloa.github.io/2020/05/21/hexo_setup/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
+          </div>
+
+        
+
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fas fa-terminal"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">naremloa</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
