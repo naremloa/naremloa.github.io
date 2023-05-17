@@ -1,7 +1,8 @@
 ---
 title: Deno 1.0
 id: translation-deno-1-0
-date: 2020-05-18 17:47:28
+date: 2020-05-18
+updated: 2023-05-16
 categories: Deno
 tags:
   - Deno

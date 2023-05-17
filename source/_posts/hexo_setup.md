@@ -1,7 +1,8 @@
 ---
 title: Hexo建置
-id: hexo_setup
-date: 2020-05-21 16:37:25
+id: hexo-setup
+date: 2020-05-21
+updated: 2023-05-16
 categories: Hexo
 description: 該網站的建立過程記錄。包括建立流程，配置設定，相關套件使用和參考文章。
 tags:

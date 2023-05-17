@@ -1,7 +1,8 @@
 ---
 title: 文章隨筆(200520
-id: jotting_200520
-date: 2020-05-20 14:04:52
+id: jotting-200520
+date: 2020-05-20
+updated: 2023-05-16
 categories: HTTP
 tags:
   - HTTP
